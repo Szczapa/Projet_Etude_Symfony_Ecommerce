@@ -1,0 +1,28 @@
+.navbar-item-custom a {
+  color: white;
+  text-decoration: none;
+}
+
+footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: #dfeaff;
+}
+
+.top {
+  color: rgb(103, 103, 103);
+}
+
+.product-container {
+  margin-bottom: 90px;
+}
+
+.hover-text {
+  color: inherit;
+}
+
+.wight {
+  color: white;
+}
