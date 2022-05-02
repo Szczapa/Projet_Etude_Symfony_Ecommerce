@@ -26,3 +26,12 @@ footer {
 .wight {
   color: white;
 }
+
+.bottom {
+  margin-bottom: 130px;
+}
+
+.cart-icon {
+  height: 20px;
+  padding-left: 20px;
+}
