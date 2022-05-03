@@ -62,7 +62,8 @@ class AdressType extends AbstractType
             ->add('country',CountryType::class,[
                 'label' => 'Pays',
                 'attr' => [
-                    'placeholder' => 'Votre Pays'
+                    'placeholder' => 'Votre Pays',
+                    'class' => 'form-control'
                 ]
             ])
             ->add('phone',TelType::class,[
@@ -72,7 +73,7 @@ class AdressType extends AbstractType
                 ]
             ])
             ->add('submit',SubmitType::class,[
-                'label' => 'ajouter mon adresse',
+                'label' => 'Enregistrer',
                 'attr' =>[
                     'class' => 'btn-block btn-info'
                 ]

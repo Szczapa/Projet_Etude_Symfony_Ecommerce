@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 29 avr. 2022 à 12:33
+-- Généré le : mar. 03 mai 2022 à 16:42
 -- Version du serveur : 10.4.20-MariaDB
 -- Version de PHP : 8.0.9
 
@@ -22,6 +22,57 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `afcicommerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `afcicommerce`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `address`
+--
+
+CREATE TABLE IF NOT EXISTS `address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D4E6F81A76ED395` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `address`
+--
+
+INSERT INTO `address` (`id`, `user_id`, `name`, `firstname`, `lastname`, `company`, `address`, `postal`, `city`, `country`, `phone`) VALUES
+(6, 4, 'kebab', 'michel', 'michele2', 'kebab avec la sauce', '452 rue de l\'oignon', '50000', 'boulette', 'FR', '0303030303'),
+(7, 4, 'maison', 'aa', 'bb', NULL, '4555 dfezfddfs', '500', 'bb', 'BH', '0606060606');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `carrier`
+--
+
+CREATE TABLE IF NOT EXISTS `carrier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `carrier`
+--
+
+INSERT INTO `carrier` (`id`, `name`, `description`, `price`) VALUES
+(1, 'Calissimo', 'Un livraison presque en bon état dans un délai incertain de 24/48h parce qu\'on tien jamais nos délais.', 24);
 
 -- --------------------------------------------------------
 
@@ -69,7 +120,11 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20220427091546', '2022-04-27 11:16:04', 174),
 ('DoctrineMigrations\\Version20220428102126', '2022-04-28 12:21:40', 286),
 ('DoctrineMigrations\\Version20220428104043', '2022-04-28 12:40:50', 1041),
-('DoctrineMigrations\\Version20220428120219', '2022-04-28 14:02:24', 111);
+('DoctrineMigrations\\Version20220428120219', '2022-04-28 14:02:24', 111),
+('DoctrineMigrations\\Version20220502132148', '2022-05-02 15:22:04', 942),
+('DoctrineMigrations\\Version20220503091154', '2022-05-03 11:12:10', 468),
+('DoctrineMigrations\\Version20220503092849', '2022-05-03 11:28:57', 1155),
+('DoctrineMigrations\\Version20220503122732', '2022-05-03 14:27:37', 82);
 
 -- --------------------------------------------------------
 
@@ -89,6 +144,41 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
   KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
   KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
   KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `order`
+--
+
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `carrier_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `carrier_price` double NOT NULL,
+  `delivery` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_paid` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_F5299398A76ED395` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `order_details`
+--
+
+CREATE TABLE IF NOT EXISTS `order_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `my_order_id` int(11) NOT NULL,
+  `product` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `total` double NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_845CA2C1BFCDF877` (`my_order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -153,6 +243,24 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `firstname`, `lastname`)
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `address`
+--
+ALTER TABLE `address`
+  ADD CONSTRAINT `FK_D4E6F81A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `FK_F5299398A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `FK_845CA2C1BFCDF877` FOREIGN KEY (`my_order_id`) REFERENCES `order` (`id`);
 
 --
 -- Contraintes pour la table `product`
