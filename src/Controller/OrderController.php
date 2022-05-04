@@ -6,12 +6,17 @@ use App\Classes\Cart;
 use App\Entity\Order;
 use App\Entity\OrderDetails;
 use App\Form\OrderType;
+
 use DateTime;
+
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 class OrderController extends AbstractController
 {
@@ -74,8 +79,9 @@ class OrderController extends AbstractController
             $order->setDelivery($delivery_content);
             $order->setisPaid(0);
 
-            $this->entityManager->persist($order);
-            
+            $this->entityManager->persist($order);            
+
+
             foreach($cart->getFull() as $product){
 
                 $orderDetails = new OrderDetails();
@@ -85,9 +91,11 @@ class OrderController extends AbstractController
                 $orderDetails->setPrice($product['product']->getPrix());
                 $orderDetails->setTotal($product['product']->getPrix() * $product['quantity']);
 
-                $this->entityManager->persist($orderDetails);
+                $this->entityManager->persist($orderDetails);               
             }
-            //$this->entityManager->flush();
+            // $this->entityManager->flush();
+
+
             return $this->render('order/addOrder.html.twig',[            
             'cart' => $cart->getFull(),            
             'carrier' => $carriers,
@@ -96,4 +104,5 @@ class OrderController extends AbstractController
         }
         return $this->redirectToRoute('cart');
     }
+
 }

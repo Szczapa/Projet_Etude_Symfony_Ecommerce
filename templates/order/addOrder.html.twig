@@ -35,12 +35,12 @@
                 {% set total = total + (product.product.prix * product.quantity) %}
         {% endfor %}     
         <hr>
-        {# {{dump(carrier)}} #}
+        
         <strong>Sous-Total :</strong> {{((total) / 100) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
         <strong>Livraison :</strong> {{(carrier.price) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
         <hr>
         <strong>Total :</strong> </strong> {{(((total) / 100) +(carrier.price)) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
-        <a href="" class="btn btn-success btn-block mt-3">Payer</a>
+        <a href="#" class="btn btn-success btn-block mt-3">Payer</a>
     </div>
 </div>
 {% endblock %}
