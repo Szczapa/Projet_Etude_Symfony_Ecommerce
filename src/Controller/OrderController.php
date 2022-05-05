@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
 class OrderController extends AbstractController
 {
     private $entityManager;
@@ -72,6 +71,8 @@ class OrderController extends AbstractController
             $delivery_content .= '<br>'. $delivery->getCountry();
             
             $order = new Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carriers->getName());
@@ -79,7 +80,8 @@ class OrderController extends AbstractController
             $order->setDelivery($delivery_content);
             $order->setisPaid(0);
 
-            $this->entityManager->persist($order);            
+            $this->entityManager->persist($order);         
+
 
 
             foreach($cart->getFull() as $product){
@@ -93,13 +95,14 @@ class OrderController extends AbstractController
 
                 $this->entityManager->persist($orderDetails);               
             }
-            // $this->entityManager->flush();
-
-
+            // dd($order->getReference());
+            $this->entityManager->flush();
+        
             return $this->render('order/addOrder.html.twig',[            
             'cart' => $cart->getFull(),            
             'carrier' => $carriers,
-            'delivery' => $delivery_content
+            'delivery' => $delivery_content,
+            'reference' => $order->getReference()
         ]);
         }
         return $this->redirectToRoute('cart');

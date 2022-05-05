@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+// use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -32,9 +32,8 @@ class OrderCrudController extends AbstractCrudController
             DateTimeField::new('createdAt','Créé le'),
             TextField::new('user.getIdentity', 'Utilisateur'),
             MoneyField::new('total')->setCurrency('EUR'),
+            MoneyField::new('carrierPrice','Frais de port')->setCurrency('EUR'),
             BooleanField::new('isPaid','Payée')
-
-
         ];
     }
 

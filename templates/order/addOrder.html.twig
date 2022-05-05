@@ -2,6 +2,11 @@
 
 {% block title %}Recapitulatif et paiement!{% endblock %}
 
+{% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+{% endblock %}
+
 {% block content %}
 <h2>Mon récapitulatif de commande</h2>
 <p>Verifier votre commande avant de valider</p>
@@ -14,7 +19,7 @@
     <strong>Mon adressse :</strong>
     {{delivery|raw}}
     <hr>
-    <strong>Mon transporteur : </strong>
+    <strong>Mon transporteur : </strong><br>
     {{carrier.name}} <br>
     {{carrier.description}} <br>
     {{(carrier.price) | number_format (2,',')}} € <small>Tva Incluse</small>
@@ -40,7 +45,11 @@
         <strong>Livraison :</strong> {{(carrier.price) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
         <hr>
         <strong>Total :</strong> </strong> {{(((total) / 100) +(carrier.price)) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
-        <a href="#" class="btn btn-success btn-block mt-3">Payer</a>
+        <hr>
+
+    <form action="/commande/create-session/{{reference}}" method="POST">
+        <button type="submit" id="checkout-button" class="btn btn-success btn-block">Payer</button>
+    </form>
     </div>
 </div>
 {% endblock %}
