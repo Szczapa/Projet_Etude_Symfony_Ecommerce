@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 03 mai 2022 à 16:42
+-- Généré le : jeu. 05 mai 2022 à 16:41
 -- Version du serveur : 10.4.20-MariaDB
 -- Version de PHP : 8.0.9
 
@@ -124,7 +124,9 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20220502132148', '2022-05-02 15:22:04', 942),
 ('DoctrineMigrations\\Version20220503091154', '2022-05-03 11:12:10', 468),
 ('DoctrineMigrations\\Version20220503092849', '2022-05-03 11:28:57', 1155),
-('DoctrineMigrations\\Version20220503122732', '2022-05-03 14:27:37', 82);
+('DoctrineMigrations\\Version20220503122732', '2022-05-03 14:27:37', 82),
+('DoctrineMigrations\\Version20220505094244', '2022-05-05 11:43:01', 388),
+('DoctrineMigrations\\Version20220505122536', '2022-05-05 14:25:49', 81);
 
 -- --------------------------------------------------------
 
@@ -160,9 +162,26 @@ CREATE TABLE IF NOT EXISTS `order` (
   `carrier_price` double NOT NULL,
   `delivery` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_paid` tinyint(1) NOT NULL,
+  `reference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stripe_session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_F5299398A76ED395` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `order`
+--
+
+INSERT INTO `order` (`id`, `user_id`, `created_at`, `carrier_name`, `carrier_price`, `delivery`, `is_paid`, `reference`, `stripe_session_id`) VALUES
+(1, 4, '2022-05-04 09:05:04', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '', NULL),
+(2, 4, '2022-05-04 09:05:39', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '', NULL),
+(3, 4, '2022-05-05 12:03:12', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '05052022-6273a0e004054', NULL),
+(4, 4, '2022-05-05 14:29:03', 'Calissimo', 24, 'michel michele2<br>0303030303<br>kebab avec la sauce<br>452 rue de l\'oignon<br>50000 boulette<br>FR', 0, '05052022-6273c30f46225', NULL),
+(5, 4, '2022-05-05 14:30:54', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '05052022-6273c37ebdc38', NULL),
+(6, 4, '2022-05-05 14:46:13', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '05052022-6273c715e7dda', 'cs_test_b12bUqE4xxbiq5pm2cmtLGhhwCtqqjbqd9DmjQlnQqzhXc1wrAI11fuQgc'),
+(7, 4, '2022-05-05 16:23:02', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '05052022-6273ddc6a12ff', 'cs_test_b1rJm6j0z7A4tdVCiggzSZd0ArXqIy19J28uzFWseIemKxEW5pAtyBPRyK'),
+(8, 4, '2022-05-05 16:30:47', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 0, '05052022-6273df974adfa', 'cs_test_b1KhQKfCMfATbQkdSENl9Q2H91eRva1jLg0izN5KQcfCzN9IuslqgyC3Jx'),
+(9, 4, '2022-05-05 16:33:31', 'Calissimo', 24, 'aa bb<br>0606060606<br>4555 dfezfddfs<br>500 bb<br>BH', 1, '05052022-6273e03bd0edc', 'cs_test_b1G8P6kvChseOxBqJ62PLjHCKkhy4ehy1s6Y7TH6WMDkLV5lSb7fuEkNun');
 
 -- --------------------------------------------------------
 
@@ -179,7 +198,29 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   `total` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_845CA2C1BFCDF877` (`my_order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `my_order_id`, `product`, `quantity`, `price`, `total`) VALUES
+(1, 1, 'Bonnet Rouge pour l\'hiver', 2, 1000, 2000),
+(2, 2, 'Bonnet Rouge pour l\'hiver', 2, 1000, 2000),
+(3, 3, 'Bonnet Rouge pour l\'hiver', 1, 1000, 1000),
+(4, 3, 'Echarpe en coton', 2, 900, 1800),
+(5, 4, 'Bonnet Rouge pour l\'hiver', 1, 1000, 1000),
+(6, 4, 'Echarpe en coton', 2, 900, 1800),
+(7, 5, 'Bonnet Rouge pour l\'hiver', 3, 1000, 3000),
+(8, 5, 'Echarpe en coton', 2, 900, 1800),
+(9, 6, 'Bonnet Rouge pour l\'hiver', 3, 1000, 3000),
+(10, 6, 'Echarpe en coton', 2, 900, 1800),
+(11, 7, 'Bonnet Rouge pour l\'hiver', 3, 1000, 3000),
+(12, 7, 'Echarpe en coton', 2, 900, 1800),
+(13, 8, 'Bonnet Rouge pour l\'hiver', 3, 1000, 3000),
+(14, 8, 'Echarpe en coton', 2, 900, 1800),
+(15, 9, 'Bonnet Rouge pour l\'hiver', 3, 1000, 3000),
+(16, 9, 'Echarpe en coton', 2, 900, 1800);
 
 -- --------------------------------------------------------
 
