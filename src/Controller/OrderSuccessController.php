@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\Cart;
+use App\Classes\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -23,19 +24,24 @@ class OrderSuccessController extends AbstractController
     public function index($CHECKOUT_SESSION_ID,Cart $cart): Response
     {
         $order = $this->entityManager->getRepository(Order::class)->findOneBy(['stripeSessionId' =>  $CHECKOUT_SESSION_ID]);
-        if(!$order || $order->getUser() != $this->getUser())
-        {
+        if(!$order || $order->getUser() != $this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
-        if(!$order->getIsPaid()){
+        if($order->getState() == 0) {
             $cart->remove();
-            $order->setIsPaid(1);
+            $order->setState(1);
             $this->entityManager->flush();
+
+            $mail = new Mail();
+            $content = "Bonjour, ". $order->getUser()->getFirstname()." <br> nous sommes ravies que vous ayez passé commande chez nous ! La commande est désormais en préparation.";
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Bienvenue sur notre boutique', $content);            
         }        
 
-        return $this->render('order/order_validate.html.twig',[
+        return $this->render(
+            'order/order_validate.html.twig', [
             'order' => $order,
-        ]);
+            ]
+        );
     }
 }

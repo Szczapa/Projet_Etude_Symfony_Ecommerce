@@ -11,20 +11,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
-    // private $entityManager;
-
-    // public function __construct(EntityManagerInterface $entityManager)
-    // {
-    //     $this-> entityManager = $entityManager;
-    // }
 
     #[Route('/panier', name: 'cart')]
     public function index(Cart $cart): Response
     {       
-        return $this->render('cart/cart.html.twig', [
+        return $this->render(
+            'cart/cart.html.twig', [
             'cart' => $cart->getFull()
             
-        ]);
+            ]
+        );
     }
 
     #[Route('/cart/add/{id}', name: 'add_to_cart')]

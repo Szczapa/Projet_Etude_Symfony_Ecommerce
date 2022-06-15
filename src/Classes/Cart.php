@@ -20,9 +20,9 @@ class Cart
 
     public function add($id)
     {
-        $cart = $this->requestStack ->get('cart',[]);
+        $cart = $this->requestStack ->get('cart', []);
 
-        if (!empty ($cart[$id])){
+        if (!empty($cart[$id])) {
             $cart[$id]++;
         }else{
             $cart[$id] = 1;
@@ -32,9 +32,9 @@ class Cart
 
     public function decrease($id)
     {
-        $cart = $this->requestStack ->get('cart',[]);
+        $cart = $this->requestStack ->get('cart', []);
 
-        if ($cart[$id]>1){
+        if ($cart[$id]>1) {
             $cart[$id]--;
         }else{
             unset($cart[$id]);
@@ -54,7 +54,7 @@ class Cart
 
     public function delete($id)
     {
-    $cart = $this->requestStack ->get('cart',[]);
+        $cart = $this->requestStack ->get('cart', []);
         unset($cart[$id]);
         
         return $this->requestStack->set('cart', $cart);
@@ -65,19 +65,18 @@ class Cart
     {
         
         $cartContent = [];
-        if($this -> get())
-        {        
-        foreach($this->get() as $id => $quantity){
-            $product_object = $this->entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
-            if (!$product_object){
-                $this->delete($id);
-                continue;
-            }
-            $cartContent[] = [
+        if($this -> get()) {        
+            foreach($this->get() as $id => $quantity){
+                $product_object = $this->entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
+                if (!$product_object) {
+                    $this->delete($id);
+                    continue;
+                }
+                $cartContent[] = [
                 'product' => $product_object,
                 'quantity' => $quantity   
-            ];
-        }            
+                ];
+            }            
             return $cartContent;
         }
     }

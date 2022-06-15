@@ -22,7 +22,7 @@
     <strong>Mon transporteur : </strong><br>
     {{carrier.name}} <br>
     {{carrier.description}} <br>
-    {{(carrier.price) | number_format (2,',')}} € <small>Tva Incluse</small>
+    {{(carrier.price / 100) | number_format (2,',')}} € <small>Tva Incluse</small>
 
     </div>
     {% set total = null %}
@@ -34,17 +34,17 @@
                 <small>{{product.product.subtitle}}</small> <br>
                     X {{product.quantity}} </div>
                 <div class="col-2 my-auto">
-                {{((product.product.prix * product.quantity) / 100) | number_format (2,',')}} € <small>Tva Incluse</small>
+                {{((product.product.prix * product.quantity) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>
                 </div>
             </div>
                 {% set total = total + (product.product.prix * product.quantity) %}
         {% endfor %}     
         <hr>
         
-        <strong>Sous-Total :</strong> {{((total) / 100) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
-        <strong>Livraison :</strong> {{(carrier.price) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
+        <strong>Sous-Total :</strong> {{((total) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>   <br>
+        <strong>Livraison :</strong> {{(carrier.price / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>   <br>
         <hr>
-        <strong>Total :</strong> </strong> {{(((total) / 100) +(carrier.price)) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
+        <strong>Total :</strong> </strong> {{(((total) / 100) + (carrier.price / 100)) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
         <hr>
 
     <form action="/commande/create-session/{{reference}}" method="POST">

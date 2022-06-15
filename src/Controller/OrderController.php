@@ -28,30 +28,35 @@ class OrderController extends AbstractController
     #[Route('/commande', name: 'app_order')]
     public function index(Cart $cart,Request $request): Response
     {   
-        if (!$this->getUser()->getAddresses()->getValues())
-        {
+        if (!$this->getUser()->getAddresses()->getValues()) {
             return $this->redirectToRoute('account_address_add');
         }
-        $form = $this->createForm(OrderType::class, null,[
+        $form = $this->createForm(
+            OrderType::class, null, [
             'user' => $this->getUser()
-        ]);
+            ]
+        );
         
-        return $this->render('order/order.html.twig',[
+        return $this->render(
+            'order/order.html.twig', [
             'form' => $form->createView(),
             'cart' => $cart->getFull()
-        ]);
+            ]
+        );
     }
 
     #[Route('/commande/recap', name: 'app_order_recap', methods:["POST"])]
     public function add(Cart $cart,Request $request): Response
     {     
-        $form = $this->createForm(OrderType::class, null,[
+        $form = $this->createForm(
+            OrderType::class, null, [
             'user' => $this->getUser()
-        ]);
+            ]
+        );
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()) {
             
 
             $date = new DateTime();
@@ -62,7 +67,7 @@ class OrderController extends AbstractController
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
             $delivery_content .= '<br>'. $delivery->getPhone();
 
-            if($delivery->getCompany()){
+            if($delivery->getCompany()) {
                 $delivery_content .= '<br>'. $delivery->getCompany();
             }           
 
@@ -78,7 +83,7 @@ class OrderController extends AbstractController
             $order->setCarrierName($carriers->getName());
             $order->setCarrierPrice($carriers->getPrice());           
             $order->setDelivery($delivery_content);
-            $order->setisPaid(0);
+            $order->setState(0);
 
             $this->entityManager->persist($order);         
 
@@ -98,12 +103,14 @@ class OrderController extends AbstractController
             // dd($order->getReference());
             $this->entityManager->flush();
         
-            return $this->render('order/addOrder.html.twig',[            
-            'cart' => $cart->getFull(),            
-            'carrier' => $carriers,
-            'delivery' => $delivery_content,
-            'reference' => $order->getReference()
-        ]);
+            return $this->render(
+                'order/addOrder.html.twig', [            
+                'cart' => $cart->getFull(),            
+                'carrier' => $carriers,
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
+                ]
+            );
         }
         return $this->redirectToRoute('cart');
     }

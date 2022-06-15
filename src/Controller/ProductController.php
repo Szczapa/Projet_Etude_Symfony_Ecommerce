@@ -25,31 +25,36 @@ class ProductController extends AbstractController
         $products = $this->entityManager->getRepository(Product::class)->findAll();
 
         $search = new Search();
-        $form = $this->createForm(FormSearchType::class,$search);
+        $form = $this->createForm(FormSearchType::class, $search);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if($form->isSubmitted() && $form->isValid()) {
             $search =$form->getData();
             $products = $this->entityManager->getRepository(Product::class)->findWithSearch($search);
         }
 
-        return $this->render('product/product.html.twig', [
+        return $this->render(
+            'product/product.html.twig', [
             'products' => $products,
             'form' => $form->createView()
-        ]);
+            ]
+        );
     }
 
     #[Route('/produits/{slug}', name: 'product_slug')]
     public function product(string $slug): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
-        
-        if(!$product){
+        $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
+        // dd($best);
+        if(!$product) {
             return $this->redirectToRoute('app_product');
         }        
         
-        return $this->render('product/show.html.twig', [
-            'product' => $product
-        ]);
+        return $this->render(
+            'product/show.html.twig', [
+            'product' => $product,
+            'best' => $best
+            ]
+        );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,36 +21,52 @@ class RegisterController extends AbstractController
 
     #[Route('/inscription', name: 'register')]
     public function index(Request $request,UserPasswordHasherInterface $hasher): Response
-    {        
+    {   
+        $notification = null;        
+
         $user = new User();
 
-        $form = $this->createForm(RegisterType::class,$user);
+        $form = $this->createForm(RegisterType::class, $user);
 
         $form->handleRequest($request);
         
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()) {
             
             $user = $form->getData();
 
-            $password = $user->getPassword();
+            $search_email = $this->entityManager->getRepository(User::class)->findOneBy([ "email" => $user->getEmail()]);
 
-            $passwordHash = $hasher->hashPassword(
-                $user,
-                $password
-            );
+            if($search_email) {
+                $notification = 'Cette Adresse Mail est déjà utilisé';
+            } else {
+                
+                $password = $user->getPassword();
+
+                $passwordHash = $hasher->hashPassword(
+                    $user,
+                    $password
+                );
             
-            $user->setPassword($passwordHash);
+                $user->setPassword($passwordHash);
 
-            $this->entityManager->persist($user);
+                $this->entityManager->persist($user);
 
-            $this->entityManager->flush();
+                $this->entityManager->flush(); 
 
-            // return $this->redirectToRoute('DefautController');
+                $notification = 'Votre inscription à était prise en compte'; 
+                
+                $mail = new Mail();
+                $content = "Bonjour, ".$user->getFirstname()." <br> nous sommes ravies de vous avoir sur notre projet de boutique.";
+                $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur notre boutique', $content);
+            }            
         }
 
-        return $this->renderForm('register/register.html.twig',[
+        return $this->renderForm(
+            'register/register.html.twig', [
             'form' => $form,
-        ]);
+            'notification' => $notification
+            ]
+        );
     }
 }

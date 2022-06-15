@@ -29,30 +29,32 @@ class AccountPasswordController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted() && $form->isValid()) {
 
             $old_password = $form->get('old_password')->getData();
 
-            if($hasher->isPasswordValid($user, $old_password)){
+            if($hasher->isPasswordValid($user, $old_password)) {
                 $new_pwd = $form->get('new_password')->getData();
 
-            $password = $hasher->hashPassword(
-                $user,
-                $new_pwd
-            );
-            $user->setPassword($password);
+                $password = $hasher->hashPassword(
+                    $user,
+                    $new_pwd
+                );
+                $user->setPassword($password);
             
-            $this->entityManager->flush();
-            $notification = 'votre mot de passe est modifié';
+                $this->entityManager->flush();
+                $notification = 'votre mot de passe est modifié';
             }else{
                 $notification2 = 'Erreur dans le mot de passe';
             }
         }
 
-        return $this->renderForm('account/password.html.twig',[
+        return $this->renderForm(
+            'account/password.html.twig', [
             'form' => $form,
             'notification' => $notification,
             'notification2' => $notification2
-        ]);
+            ]
+        );
     }
 }

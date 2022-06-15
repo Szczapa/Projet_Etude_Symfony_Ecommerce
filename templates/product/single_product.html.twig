@@ -1,0 +1,9 @@
+<a href="{{ path('product_slug', {'slug' : product.slug }) }}" class ="text-decoration-none text-secondary">    
+                        
+                    <img src="/uploads/{{product.image}}" class="card-img-top" alt="{{product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text"><small>{{product.subtitle}}</small></p>
+                        <span> {{(product.prix / 100) | number_format (2,',')}}€</span></a>                    
+                    </div>
+                </a>

@@ -17,22 +17,27 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email',EmailType::class,
-            [
+            ->add(
+                'email', EmailType::class,
+                [
                 'disabled' => true,
                 'label' => 'Mon email'
-            ])
-            ->add ('old_password',PasswordType::class,
-            [
+                ]
+            )
+            ->add(
+                'old_password', PasswordType::class,
+                [
                 'mapped' => false,
                 'label'=> 'Mot de passe Actuel',
                 'attr'=>[
                     'placeholder'=>'Entrez votre mot de passe actuel'
                 ]
-            ])
+                ]
+            )
             
-            ->add('new_password',RepeatedType::class,
-            [
+            ->add(
+                'new_password', RepeatedType::class,
+                [
                 'type' => PasswordType::class,
                 'mapped' => false,
                 'invalid_message'=>'Mot de passe erroné',
@@ -50,30 +55,38 @@ class ChangePasswordType extends AbstractType
                         'placeholder'=>'Confimer nouveau mot de passe'                        
                     ],
                 ]
-            ])
+                ]
+            )
 
-            ->add('firstname',TextType::class,
-            [
+            ->add(
+                'firstname', TextType::class,
+                [
                 'disabled' => true,
                 'label' => 'Mon prenom'
-            ])
-            ->add('lastname',TextType::class,
-            [
+                ]
+            )
+            ->add(
+                'lastname', TextType::class,
+                [
                 'disabled' => true,
                 'label' => 'Mon nom'
-            ])
+                ]
+            )
 
-            ->add('submit',SubmitType::class,
+            ->add(
+                'submit', SubmitType::class,
                 [
                     'label'=>'Modifier'
-                ])
-        ;
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => User::class,
-        ]);
+            ]
+        );
     }
 }

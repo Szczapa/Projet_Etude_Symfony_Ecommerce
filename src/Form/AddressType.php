@@ -16,75 +16,96 @@ class AdressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name',TextType::class,[
+            ->add(
+                'name', TextType::class, [
                 'label' => 'Nom de votre adresse :',
                 'attr'=> [
                     'placeholder' => 'Nommez votre adresse'
                 ]
-            ])
-            ->add('firstname',TextType::class,[
+                ]
+            )
+            ->add(
+                'firstname', TextType::class, [
                 'label' => ' Votre Prenom :',
                 'attr'=> [
                     'placeholder' => 'Prénom'
                 ]
-            ])
-            ->add('lastname',TextType::class,[
+                ]
+            )
+            ->add(
+                'lastname', TextType::class, [
                 'label' => ' Votre nom',
                 'attr'=> [
                     'placeholder' => 'Nom'
                 ]
-            ])
-            ->add('Company',TextType::class,[
+                ]
+            )
+            ->add(
+                'Company', TextType::class, [
                 'label' => 'Votre entreprise :',
                 'required' => false,
                 'attr' => [
                     'placeholder' => '(facultatif) Nom entreprise'
                 ]
-            ])
-            ->add('address',TextType::class,[
+                ]
+            )
+            ->add(
+                'address', TextType::class, [
                 'label' => 'Votre Adresse :',
                 'attr' => [
                     'placeholder' => 'Adresse'
                 ]
-            ])
-            ->add('postal',TextType::class,[
+                ]
+            )
+            ->add(
+                'postal', TextType::class, [
                 'label' => 'Votre code Postal :',
                 'attr' => [
                     'placeholder' => 'Code Postal'
                 ]
-            ])
-            ->add('city',TextType::class,[
+                ]
+            )
+            ->add(
+                'city', TextType::class, [
                 'label' => 'Votre ville :',
                 'attr' => [
                     'placeholder' => 'Ville'
                 ]
-            ])
-            ->add('country',CountryType::class,[
+                ]
+            )
+            ->add(
+                'country', CountryType::class, [
                 'label' => 'Pays',
                 'attr' => [
                     'placeholder' => 'Votre Pays',
                     'class' => 'form-control'
                 ]
-            ])
-            ->add('phone',TelType::class,[
+                ]
+            )
+            ->add(
+                'phone', TelType::class, [
                 'label' => 'Votre numéro de téléphone :',
                 'attr' => [
                     'placeholder' => 'numéro'
                 ]
-            ])
-            ->add('submit',SubmitType::class,[
+                ]
+            )
+            ->add(
+                'submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' =>[
                     'class' => 'btn-block btn-info'
                 ]
-            ])
-        ;
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => Address::class,
-        ]);
+            ]
+        );
     }
 }

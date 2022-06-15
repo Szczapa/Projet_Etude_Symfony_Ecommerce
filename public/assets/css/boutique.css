@@ -1,3 +1,6 @@
+main {
+  height: 100vh;
+}
 .navbar-item-custom a {
   color: white;
   text-decoration: none;
@@ -5,8 +8,9 @@
 
 footer {
   text-align: center;
-  position: fixed;
-  bottom: 0px;
+  /* position: fixed;
+  bottom: 0px;*/
+  height: 12%;
   width: 100%;
   background-color: #dfeaff;
 }

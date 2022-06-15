@@ -19,18 +19,23 @@ class RegisterType extends AbstractType
     {
         
         $builder
-            ->add('email',EmailType::class,
+            ->add(
+                'email', EmailType::class,
                 [
-                    'constraints'=> new Length([
+                    'constraints'=> new Length(
+                        [
                         'min' =>2,
-                        'max' =>30
-                    ]),
+                        'max' =>70
+                        ]
+                    ),
                     
                     'attr'=>[
                     'placeholder'=>'saisir votre email'
                     ]
-                ])            
-            ->add('password',RepeatedType::class,                
+                ]
+            )            
+            ->add(
+                'password', RepeatedType::class,                
                 [
                     'type'=> PasswordType::class,
                     'invalid_message'=>'Mot de passe différent',  
@@ -46,43 +51,55 @@ class RegisterType extends AbstractType
                         'placeholder'=>'Confimer mot de passe'
                         ]
                     ],
-                ])
+                ]
+            )
 
-            ->add('firstname',TextType::class,
+            ->add(
+                'firstname', TextType::class,
                 [
                     'label'=> 'Prenom',
-                    'constraints'=> new Length([
+                    'constraints'=> new Length(
+                        [
                         'min' =>2,
                         'max' =>30
-                    ]),
+                        ]
+                    ),
                     'attr' => [
                     'placeholder '=> 'saisir votre prénom'
                     ]
-                ])
+                ]
+            )
 
-            ->add('lastname',TextType::class,
+            ->add(
+                'lastname', TextType::class,
                 [
                     'label'=> 'Nom',
-                    'constraints'=> new Length([
+                    'constraints'=> new Length(
+                        [
                         'min' =>2,
                         'max' =>30
-                    ]),
+                        ]
+                    ),
                     'attr' => [
                     'placeholder'=>'saisir votre nom'
+                    ]
                 ]
-            ])
+            )
 
-            ->add('submit',SubmitType::class,
+            ->add(
+                'submit', SubmitType::class,
                 [
                     'label'=>'s\'inscrire'
-                ])
-        ;
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => User::class,
-        ]);
+            ]
+        );
     }
 }
