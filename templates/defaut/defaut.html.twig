@@ -4,6 +4,7 @@
 
    {% block content %}
 
+    {% if best | length !=0 %}    
         <h3> Nos Produit les plus achetés</h3>
         <div class="row">
                 {% for product in best %}
@@ -12,7 +13,7 @@
                 </div>
                 {% endfor %}
         </div>
-
+    {% endif %}
 
 
         <hr class="featurette-divider">

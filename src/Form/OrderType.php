@@ -15,10 +15,12 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $user = $options['user'];
-        
+
         $builder
             ->add(
-                'addresses', EntityType::class, [
+                'addresses',
+                EntityType::class,
+                [
                 'label' => false,
                 'required' => true,
                 'class' => Address::class,
@@ -29,7 +31,9 @@ class OrderType extends AbstractType
             )
 
             ->add(
-                'carriers', EntityType::class, [
+                'carriers',
+                EntityType::class,
+                [
                 'label' => 'Choisissez votre transporteur',
                 'required' => true,
                 'class' => Carrier::class,
@@ -39,7 +43,9 @@ class OrderType extends AbstractType
             )
 
             ->add(
-                'submit', SubmitType::class, [
+                'submit',
+                SubmitType::class,
+                [
                 'label' => 'Valider ma commande',
                 'attr' => [
                     'class' => 'btn btn-success btn-block'

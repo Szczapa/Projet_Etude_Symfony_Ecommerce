@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualité Geek du moment!{% endblock %}
+
+{% block content %}
+        <img src="{{ asset ('assets/image/Bientot.png')}}" alt="En construction">
+
+            
+    {% if posts|length != 0 %}
+        {% for post in posts %}
+            Je suis post            
+      {% endfor %}
+    {% else %}  
+        Aucun Post disponible
+    {% endif %}
+ 
+{% endblock %}

@@ -17,9 +17,11 @@ class SearchType extends AbstractType
     {
         $builder
             ->add(
-                'string', TextType::class, [  
+                'string',
+                TextType::class,
+                [
                 'label' => false,
-                'required' => false,                
+                'required' => false,
                 'attr' => [
                 'placeholder' => 'Rechercher',
                 'class' => 'form-control-sm'
@@ -28,7 +30,9 @@ class SearchType extends AbstractType
             )
 
             ->add(
-                'categories', EntityType::class, [
+                'categories',
+                EntityType::class,
+                [
                 'label' => false,
                 'required' => false,
                 'class' => Category::class,
@@ -38,11 +42,13 @@ class SearchType extends AbstractType
             )
 
             -> add(
-                'submit', SubmitType::class, [
-                'label'=> 'filtrer',
-                'attr'=>[
-                'class' => 'btn-block btn-success'
-                ] 
+                'submit',
+                SubmitType::class,
+                [
+                'label' => 'Appliquer',
+                'attr' => [
+                'class' => 'btn-block btn-info'
+                ]
                 ]
             );
     }

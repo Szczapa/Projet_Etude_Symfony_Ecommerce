@@ -17,79 +17,84 @@ class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
+
         $builder
             ->add(
-                'email', EmailType::class,
+                'email',
+                EmailType::class,
                 [
-                    'constraints'=> new Length(
+                    'constraints' => new Length(
                         [
-                        'min' =>2,
-                        'max' =>70
+                        'min' => 2,
+                        'max' => 70
                         ]
                     ),
-                    
-                    'attr'=>[
-                    'placeholder'=>'saisir votre email'
+
+                    'attr' => [
+                    'placeholder' => 'saisir votre email'
                     ]
                 ]
-            )            
+            )
             ->add(
-                'password', RepeatedType::class,                
+                'password',
+                RepeatedType::class,
                 [
-                    'type'=> PasswordType::class,
-                    'invalid_message'=>'Mot de passe différent',  
-                    'required'=>true,
+                    'type' => PasswordType::class,
+                    'invalid_message' => 'Mot de passe différent',
+                    'required' => true,
 
-                    'first_options'=>['label'=>'mot de passe',
+                    'first_options' => ['label' => 'mot de passe',
                     'attr' => [
-                        'placeholder'=>'saisir un mot de passe'
+                        'placeholder' => 'saisir un mot de passe'
                         ]
                     ],
-                    'second_options'=>['label'=>'Confirmer mot de passe',
+                    'second_options' => ['label' => 'Confirmer mot de passe',
                     'attr' => [
-                        'placeholder'=>'Confimer mot de passe'
+                        'placeholder' => 'Confimer mot de passe'
                         ]
                     ],
                 ]
             )
 
             ->add(
-                'firstname', TextType::class,
+                'firstname',
+                TextType::class,
                 [
-                    'label'=> 'Prenom',
-                    'constraints'=> new Length(
+                    'label' => 'Prenom',
+                    'constraints' => new Length(
                         [
-                        'min' =>2,
-                        'max' =>30
+                        'min' => 2,
+                        'max' => 30
                         ]
                     ),
                     'attr' => [
-                    'placeholder '=> 'saisir votre prénom'
+                    'placeholder ' => 'saisir votre prénom'
                     ]
                 ]
             )
 
             ->add(
-                'lastname', TextType::class,
+                'lastname',
+                TextType::class,
                 [
-                    'label'=> 'Nom',
-                    'constraints'=> new Length(
+                    'label' => 'Nom',
+                    'constraints' => new Length(
                         [
-                        'min' =>2,
-                        'max' =>30
+                        'min' => 2,
+                        'max' => 30
                         ]
                     ),
                     'attr' => [
-                    'placeholder'=>'saisir votre nom'
+                    'placeholder' => 'saisir votre nom'
                     ]
                 ]
             )
 
             ->add(
-                'submit', SubmitType::class,
+                'submit',
+                SubmitType::class,
                 [
-                    'label'=>'s\'inscrire'
+                    'label' => 's\'inscrire'
                 ]
             );
     }

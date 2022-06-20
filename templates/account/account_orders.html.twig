@@ -3,12 +3,12 @@
 {% block title %}Mes Commandes!{% endblock %}
 
 {% block content %}
-<a href="{{path('app_account')}}" class="text-decoration-none text-info">
+<a href="{{path('account')}}" class="text-decoration-none text-info">
     <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height = "15px">
     Mon compte
 </a>
 
-<h1>Mes Commandes</h1>
+<h1 class ="mt-4"><strong> Mes Commandes </strong></h1>
 <p>Bienvenue <strong>{{app.user.firstname}}</strong> sur ton récapitulatif de commande</p>
 
 {% if orders |length !=0 %}
@@ -42,6 +42,6 @@
   </tbody>
 </table>
 {% else %}
-<p class ="text-center">Vous n\'avez passé aucune commande pour aller à la boutique <a href="{{path('home')}}" class="text-decoration-none">cliquer ici</a></p>
+<p class ="text-center">Vous n'avez passé aucune commande pour aller à la boutique <a href="{{path('home')}}" class="text-decoration-none"> <strong> cliquer ici </strong></a></p>
 {% endif %}
 {% endblock %}

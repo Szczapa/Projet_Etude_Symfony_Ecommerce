@@ -9,8 +9,8 @@ Un mail de confirmation vous sera transmis à l'adresse suivante : {{order.user.
 Pour suivre votre commande cliqué sur le lien suivant : <a href="{{path('account_orders')}}">Cliquer ici</a>
 <hr>
 La société <strong>{{order.carrierName}}</strong> vous contacterons et donnerons votre numéro de suivit. <br>
-Livraison à l'adresse: <br>
-{{order.user.firstname}} {{ order.user.lastname}} <br>
+<strong>Livraison à l'adresse: </strong> <br> <br>
+
 {{order.delivery|raw}} <br>
 </p>
 <hr>

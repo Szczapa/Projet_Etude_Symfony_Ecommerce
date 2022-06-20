@@ -22,7 +22,8 @@ class AccountOrderController extends AbstractController
         $orders = $this->entityManager->getRepository(Order::class)->findSuccesOrders($this->getUser());
 
         return $this->render(
-            'account/account_orders.html.twig', [
+            'account/account_orders.html.twig',
+            [
             'orders' => $orders
             ]
         );
@@ -31,14 +32,15 @@ class AccountOrderController extends AbstractController
     #[Route('/compte/mes-commande/{reference}', name: 'account_order')]
     public function details($reference): Response
     {
-        
+
          $order = $this->entityManager->getRepository(Order::class)->findOneByReference($reference);
-         
-        if(!$order || $order->getUser() != $this->getUser()) {
+
+        if (!$order || $order->getUser() != $this->getUser()) {
             return $this->redirectToRoute('account_orders');
         }
         return $this->render(
-            'account/account_order.html.twig', [
+            'account/account_order.html.twig',
+            [
             'order' => $order
             ]
         );

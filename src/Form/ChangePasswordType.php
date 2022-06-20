@@ -18,55 +18,60 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add(
-                'email', EmailType::class,
+                'email',
+                EmailType::class,
                 [
                 'disabled' => true,
                 'label' => 'Mon email'
                 ]
             )
             ->add(
-                'old_password', PasswordType::class,
+                'old_password',
+                PasswordType::class,
                 [
                 'mapped' => false,
-                'label'=> 'Mot de passe Actuel',
-                'attr'=>[
-                    'placeholder'=>'Entrez votre mot de passe actuel'
+                'label' => 'Mot de passe Actuel',
+                'attr' => [
+                    'placeholder' => 'Entrez votre mot de passe actuel'
                 ]
                 ]
             )
-            
+
             ->add(
-                'new_password', RepeatedType::class,
+                'new_password',
+                RepeatedType::class,
                 [
                 'type' => PasswordType::class,
                 'mapped' => false,
-                'invalid_message'=>'Mot de passe erroné',
-                'required'=>true,
+                'invalid_message' => 'Mot de passe erroné',
+                'required' => true,
 
-                'first_options' =>[
-                    'label'=> 'Nouveau mot de passe',
+                'first_options' => [
+                    'label' => 'Nouveau mot de passe',
                     'attr' => [
-                        'placeholder'=>'saisir nouveau un mot de passe'                        
+                        'placeholder' => 'saisir nouveau un mot de passe'
                     ],
                 ],
-                'second_options'=>[
-                    'label'=> 'Confirmer nouveau mot de passe',
+                'second_options' => [
+                    'label' => 'Confirmer nouveau mot de passe',
                     'attr' => [
-                        'placeholder'=>'Confimer nouveau mot de passe'                        
+                        'placeholder' => 'Confimer nouveau mot de passe'
                     ],
                 ]
                 ]
             )
 
             ->add(
-                'firstname', TextType::class,
+                'firstname',
+                TextType::class,
                 [
                 'disabled' => true,
                 'label' => 'Mon prenom'
                 ]
             )
             ->add(
-                'lastname', TextType::class,
+                'lastname',
+                TextType::class,
                 [
                 'disabled' => true,
                 'label' => 'Mon nom'
@@ -74,9 +79,10 @@ class ChangePasswordType extends AbstractType
             )
 
             ->add(
-                'submit', SubmitType::class,
+                'submit',
+                SubmitType::class,
                 [
-                    'label'=>'Modifier'
+                    'label' => 'Modifier'
                 ]
             );
     }

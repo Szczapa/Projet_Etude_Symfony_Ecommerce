@@ -3,7 +3,7 @@
 {% block title %}Ma commandes {{order.reference}}!{% endblock %}
 
 {% block content %}
-<h1>Ma commande {{order.reference}}</h1>
+<h1 class ="mt-4"> <strong> Ma commande </strong> {{order.reference}}</h1>
 <a href="{{path('account_orders')}}" class="text-decoration-none text-info">
     <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height = "15px">
     Mes Commandes

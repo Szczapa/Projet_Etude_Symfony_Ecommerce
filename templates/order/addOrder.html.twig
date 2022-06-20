@@ -34,10 +34,10 @@
                 <small>{{product.product.subtitle}}</small> <br>
                     X {{product.quantity}} </div>
                 <div class="col-2 my-auto">
-                {{((product.product.prix * product.quantity) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>
+                {{((product.product.price * product.quantity) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>
                 </div>
             </div>
-                {% set total = total + (product.product.prix * product.quantity) %}
+                {% set total = total + (product.product.price * product.quantity) %}
         {% endfor %}     
         <hr>
         

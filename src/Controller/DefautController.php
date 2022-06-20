@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Header;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,14 +19,16 @@ class DefautController extends AbstractController
 
     #[Route('/', name: 'home')]
     public function index(): Response
-    {       
+    {
         $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
-        
+        $headers = $this->entityManager->getRepository(Header::class)->findAll();
+
         return $this->render(
-            'defaut/defaut.html.twig', [
-            "best" => $best
+            'defaut/defaut.html.twig',
+            [
+            "best" => $best,
+            'headers' => $headers
             ]
         );
     }
-
 }

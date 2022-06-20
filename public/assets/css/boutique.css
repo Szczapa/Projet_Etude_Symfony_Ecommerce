@@ -6,6 +6,10 @@ main {
   text-decoration: none;
 }
 
+.color-nav {
+  background-color: aquamarine;
+}
+
 footer {
   text-align: center;
   /* position: fixed;
@@ -41,6 +45,12 @@ footer {
 }
 
 .form-check {
-  background-color: #dfeaff;
+  background-color: aliceblue;
   padding: 20px;
+  border-radius: 5px;
+}
+
+.filtre {
+  background-color: aliceblue;
+  border-radius: 10px;
 }

@@ -48,9 +48,9 @@ class OrderCrudController extends AbstractCrudController
         $order->setState(2);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<span class = 'text-success'> La commande ".$order->getReference()." est bien en cours de préparation </span>");
+        $this->addFlash('notice', "<span class = 'text-success'> La commande " . $order->getReference() . " est bien en cours de préparation </span>");
 
-        $url=$this->adminUrlGenerator
+        $url = $this->adminUrlGenerator
             ->setController(OrderCrudController::class)
             ->setAction('index')
             ->generateUrl();
@@ -58,7 +58,7 @@ class OrderCrudController extends AbstractCrudController
         return $this->redirect($url);
 
         $mail = new Mail();
-        $content = "Bonjour, ". $order->getUser()->getFirstname()." <br> nous sommes ravies de vous annoncer que votre commande est en cours de Préparation";
+        $content = "Bonjour, " . $order->getUser()->getFirstname() . " <br> nous sommes ravies de vous annoncer que votre commande est en cours de Préparation";
             $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'En cours de Préparation', $content);
     }
 
@@ -68,9 +68,9 @@ class OrderCrudController extends AbstractCrudController
         $order->setState(3);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<span class = 'text-success'> La commande ".$order->getReference()." est bien en cours de Livraison </span>");
+        $this->addFlash('notice', "<span class = 'text-success'> La commande " . $order->getReference() . " est bien en cours de Livraison </span>");
 
-        $url=$this->adminUrlGenerator
+        $url = $this->adminUrlGenerator
             ->setController(OrderCrudController::class)
             ->setAction('index')
             ->generateUrl();
@@ -78,7 +78,7 @@ class OrderCrudController extends AbstractCrudController
         return $this->redirect($url);
 
         $mail = new Mail();
-        $content = "Bonjour, ". $order->getUser()->getFirstname()." <br> nous sommes ravies de vous annoncer que votre commande est en cours de Livraison";
+        $content = "Bonjour, " . $order->getUser()->getFirstname() . " <br> nous sommes ravies de vous annoncer que votre commande est en cours de Livraison";
             $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'En cours de Livraison', $content);
     }
 
@@ -87,24 +87,23 @@ class OrderCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             DateTimeField::new('createdAt', 'Créé le'),
-            TextField::new('user.getIdentity', 'Utilisateur'),            
+            TextField::new('user.getIdentity', 'Utilisateur'),
             TextEditorField::new('delivery', 'adresse de livraison')->formatValue(
                 function ($value) {
                     return $value;
                 }
             )->onlyOnDetail(),
             MoneyField::new('total')->setCurrency('EUR'),
-            MoneyField::new('carrierPrice', 'Frais de port')->setCurrency('EUR'),            
+            MoneyField::new('carrierPrice', 'Frais de port')->setCurrency('EUR'),
             TextField::new('carrierName', 'Transporteur'),
             ChoiceField::new('state')->setChoices(
-                [ 
+                [
                 'Non Payée' => 0,
                 'Payée' => 1,
-                "En Préparation" =>2,
+                "En Préparation" => 2,
                 "Livraison" => 3
                 ]
             ),
         ];
     }
-
 }

@@ -3,23 +3,22 @@
 {% block title %}Nos produits!{% endblock %}
 
 {% block content %}
-<h1>Nos produits</h1>
+<h1 class="mb-3"> <strong> Nos produits </strong></h1>
 <hr>
 
-<div class="row">
-    <div class="col-md-3">
-        <h3>Filtrer</h3>
-        <hr>
+<div class="row my-5">
+    <div class="col-md-3 filtre">
+        <h3 class="mt-2 mb-3">Filtrer</h3>        
         {{form(form)}}
     </div>
 
-    <div class="col-md-9 bottom">
+    <div class="col-md-9 bottom pl-4 ">
+
     <div class="row">
         {% for product in products %}
         <div class="col-md-4">
             <div>
-            {% include "product/single_product.html.twig" %}
-            
+            {% include "product/single_product.html.twig" %}            
             </div>    
         </div>
         {% endfor %}

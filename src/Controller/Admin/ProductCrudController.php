@@ -12,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 
-
 class ProductCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -20,7 +19,7 @@ class ProductCrudController extends AbstractCrudController
         return Product::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -38,11 +37,10 @@ class ProductCrudController extends AbstractCrudController
                ->setBasePath('uploads/')
                ->setUploadedFileNamePattern('[randomhash].[extension]'),
            BooleanField::new('isBest', 'Mise en avant'),
-           MoneyField::new('prix', 'Prix')
+           MoneyField::new('price', 'Prix')
                ->setCurrency('EUR'),
 
            AssociationField::new('category')
         ];
     }
-    
 }

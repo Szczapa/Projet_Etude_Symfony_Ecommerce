@@ -11,29 +11,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccountPasswordController extends AbstractController
 {
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this-> entityManager = $entityManager;
     }
 
-    #[Route('/compte/mdp', name: 'app_account_password')]
-    public function index(Request $request,UserPasswordHasherInterface $hasher)
+    #[Route('/compte/mdp', name: 'account_password')]
+    public function index(Request $request, UserPasswordHasherInterface $hasher)
     {
         $notification = null;
         $notification2 = null;
 
-        $user = $this->getUser();   
+        $user = $this->getUser();
 
         $form = $this->createForm(ChangePasswordType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-
+        if ($form->isSubmitted() && $form->isValid()) {
             $old_password = $form->get('old_password')->getData();
 
-            if($hasher->isPasswordValid($user, $old_password)) {
+            if ($hasher->isPasswordValid($user, $old_password)) {
                 $new_pwd = $form->get('new_password')->getData();
 
                 $password = $hasher->hashPassword(
@@ -41,16 +39,17 @@ class AccountPasswordController extends AbstractController
                     $new_pwd
                 );
                 $user->setPassword($password);
-            
+
                 $this->entityManager->flush();
                 $notification = 'votre mot de passe est modifié';
-            }else{
+            } else {
                 $notification2 = 'Erreur dans le mot de passe';
             }
         }
 
         return $this->renderForm(
-            'account/password.html.twig', [
+            'account/password.html.twig',
+            [
             'form' => $form,
             'notification' => $notification,
             'notification2' => $notification2

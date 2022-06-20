@@ -10,7 +10,7 @@
     <div class="col-md-6">
         Mon adresses
         {% set formhtml %}
-        {{form_start(form, {action:path('app_order_recap')})}}
+        {{form_start(form, {action:path('order_recap')})}}
         {{form_label(form.addresses, 'Choisissez votre adresse de livraison') }}
         <a href="{{path('account_address_add')}}" class="btn btn-info btn-sm mb-1">Ajouter une nouvelle adresse</a>
         {{form_end(form)}}

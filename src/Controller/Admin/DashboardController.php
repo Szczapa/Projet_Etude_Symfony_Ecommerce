@@ -2,12 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Actuality;
 use App\Entity\Carrier;
 use App\Entity\Category;
+use App\Entity\Header;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\User;
-
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -24,7 +25,7 @@ class DashboardController extends AbstractDashboardController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
-    #[Route('/admin', name: 'admin')]   
+    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         $routeBuilder = $this->adminUrlGenerator->setController(OrderCrudController::class)->setAction('index')->generateUrl();
@@ -34,13 +35,15 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Ecommerce');            
+            ->setTitle('Ecommerce');
     }
 
     public function configureMenuItems(): iterable
     {
         return[
             yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            yield MenuItem::linkToCrud('Header', 'fas fa-book-open-reader', Header::class),
+            yield MenuItem::linkToCrud('Actualités', 'fas fa-newspaper', Actuality::class),
 
             yield MenuItem::section('Gestion utilisateur'),
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),

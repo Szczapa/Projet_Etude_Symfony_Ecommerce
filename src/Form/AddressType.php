@@ -11,37 +11,45 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdressType extends AbstractType
+class AddressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
-                'name', TextType::class, [
+                'name',
+                TextType::class,
+                [
                 'label' => 'Nom de votre adresse :',
-                'attr'=> [
+                'attr' => [
                     'placeholder' => 'Nommez votre adresse'
                 ]
                 ]
             )
             ->add(
-                'firstname', TextType::class, [
+                'firstname',
+                TextType::class,
+                [
                 'label' => ' Votre Prenom :',
-                'attr'=> [
+                'attr' => [
                     'placeholder' => 'Prénom'
                 ]
                 ]
             )
             ->add(
-                'lastname', TextType::class, [
+                'lastname',
+                TextType::class,
+                [
                 'label' => ' Votre nom',
-                'attr'=> [
+                'attr' => [
                     'placeholder' => 'Nom'
                 ]
                 ]
             )
             ->add(
-                'Company', TextType::class, [
+                'Company',
+                TextType::class,
+                [
                 'label' => 'Votre entreprise :',
                 'required' => false,
                 'attr' => [
@@ -50,7 +58,9 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'address', TextType::class, [
+                'address',
+                TextType::class,
+                [
                 'label' => 'Votre Adresse :',
                 'attr' => [
                     'placeholder' => 'Adresse'
@@ -58,7 +68,9 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'postal', TextType::class, [
+                'postal',
+                TextType::class,
+                [
                 'label' => 'Votre code Postal :',
                 'attr' => [
                     'placeholder' => 'Code Postal'
@@ -66,7 +78,9 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'city', TextType::class, [
+                'city',
+                TextType::class,
+                [
                 'label' => 'Votre ville :',
                 'attr' => [
                     'placeholder' => 'Ville'
@@ -74,7 +88,9 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'country', CountryType::class, [
+                'country',
+                CountryType::class,
+                [
                 'label' => 'Pays',
                 'attr' => [
                     'placeholder' => 'Votre Pays',
@@ -83,7 +99,9 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'phone', TelType::class, [
+                'phone',
+                TelType::class,
+                [
                 'label' => 'Votre numéro de téléphone :',
                 'attr' => [
                     'placeholder' => 'numéro'
@@ -91,9 +109,11 @@ class AdressType extends AbstractType
                 ]
             )
             ->add(
-                'submit', SubmitType::class, [
+                'submit',
+                SubmitType::class,
+                [
                 'label' => 'Enregistrer',
-                'attr' =>[
+                'attr' => [
                     'class' => 'btn-block btn-info'
                 ]
                 ]
@@ -102,10 +122,8 @@ class AdressType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(
-            [
+        $resolver->setDefaults([
             'data_class' => Address::class,
-            ]
-        );
+        ]);
     }
 }

@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Classes;
 
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-
 
 class Cart
 {
@@ -15,7 +15,6 @@ class Cart
     {
         $this->requestStack = $requestStack->getSession();
         $this-> entityManager = $entityManager;
-        
     }
 
     public function add($id)
@@ -24,7 +23,7 @@ class Cart
 
         if (!empty($cart[$id])) {
             $cart[$id]++;
-        }else{
+        } else {
             $cart[$id] = 1;
         }
         $this->requestStack->set('cart', $cart);
@@ -34,21 +33,21 @@ class Cart
     {
         $cart = $this->requestStack ->get('cart', []);
 
-        if ($cart[$id]>1) {
+        if ($cart[$id] > 1) {
             $cart[$id]--;
-        }else{
+        } else {
             unset($cart[$id]);
         }
         $this->requestStack->set('cart', $cart);
     }
-    
+
     public function get()
     {
         return $this->requestStack->get('cart');
     }
 
     public function remove()
-    {      
+    {
         return $this->requestStack->remove('cart');
     }
 
@@ -56,17 +55,17 @@ class Cart
     {
         $cart = $this->requestStack ->get('cart', []);
         unset($cart[$id]);
-        
+
         return $this->requestStack->set('cart', $cart);
     }
 
 
     public function getFull()
     {
-        
+
         $cartContent = [];
-        if($this -> get()) {        
-            foreach($this->get() as $id => $quantity){
+        if ($this -> get()) {
+            foreach ($this->get() as $id => $quantity) {
                 $product_object = $this->entityManager->getRepository(Product::class)->findOneBy(['id' => $id]);
                 if (!$product_object) {
                     $this->delete($id);
@@ -74,9 +73,9 @@ class Cart
                 }
                 $cartContent[] = [
                 'product' => $product_object,
-                'quantity' => $quantity   
+                'quantity' => $quantity
                 ];
-            }            
+            }
             return $cartContent;
         }
     }

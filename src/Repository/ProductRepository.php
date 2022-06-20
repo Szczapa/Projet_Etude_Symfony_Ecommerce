@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)
  * @method Product[]    findAll()
- * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) * 
+ * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) *
  */
 class ProductRepository extends ServiceEntityRepository
 {
@@ -57,18 +57,18 @@ class ProductRepository extends ServiceEntityRepository
             ->select('c', 'p')
             ->join('p.category', 'c');
 
-        if(!empty($search->categories)) {
+        if (!empty($search->categories)) {
             $query = $query
                 ->andWhere('c.id IN (:categories)')
-                ->setParameter('categories', $search->categories);            
+                ->setParameter('categories', $search->categories);
         }
 
-        if(!empty($search->string)) {
+        if (!empty($search->string)) {
             $query = $query
                 ->andWhere('p.name Like :string')
-                ->setParameter('string', "%{$search->string}%");            
+                ->setParameter('string', "%{$search->string}%");
         }
-        return $query->getQuery()->getResult();        
+        return $query->getQuery()->getResult();
     }
 
     /*

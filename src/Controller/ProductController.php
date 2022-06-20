@@ -18,22 +18,23 @@ class ProductController extends AbstractController
         $this-> entityManager = $entityManager;
     }
 
-    #[Route('/produits', name: 'app_product')]
+    #[Route('/produits', name: 'products')]
     public function index(Request $request): Response
     {
-        
+
         $products = $this->entityManager->getRepository(Product::class)->findAll();
 
         $search = new Search();
         $form = $this->createForm(FormSearchType::class, $search);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $search =$form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData();
             $products = $this->entityManager->getRepository(Product::class)->findWithSearch($search);
         }
 
         return $this->render(
-            'product/product.html.twig', [
+            'product/product.html.twig',
+            [
             'products' => $products,
             'form' => $form->createView()
             ]
@@ -45,13 +46,13 @@ class ProductController extends AbstractController
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
         $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
-        // dd($best);
-        if(!$product) {
-            return $this->redirectToRoute('app_product');
-        }        
-        
+        if (!$product) {
+            return $this->redirectToRoute('products');
+        }
+
         return $this->render(
-            'product/show.html.twig', [
+            'product/show.html.twig',
+            [
             'product' => $product,
             'best' => $best
             ]

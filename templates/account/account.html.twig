@@ -3,11 +3,58 @@
 {% block title %}Mon compte{% endblock %}
 
 {% block content %}
-<h1>Mon compte</h1>
+<h1 class ="mt-4"> <strong> Mon compte </strong></h1>
  <p>Bienvenue <strong>{{app.user.firstname}}</strong> sur ta fiche de compte</p>
  <hr>
- <a href="{{path('app_account_password')}}">- Modifier mon mot de passe</a> <br>
- <a href="{{path('account_address')}}">- Gérer mes adresses</a> <br>
- <a href="{{path('account_orders')}}">- Voir mes Commandes</a> <br> 
+
+
+<div class="row container">
+
+ {% if is_granted('ROLE_ADMIN') %} 
+<div class="col-mb-3 ml-5 mb-3 ">
+<div class="card" style="width: 18rem;">
+<a href="/admin">
+  <img class="card-img-top " src="{{asset('/assets/icon/admin.png')}}" alt="Card image cap" class ="rounded mx-auto d-block" style ="width : 50px;">
+  <div class="card-body">
+    <p class="card-text">Accedez à la gestion Admin du site.</p>
+  </div>
+</a>
+</div>
+</div>
+ {% endif %}
+
+<div class="col-mb-3 ml-5 mb-3">
+<div class="card" style="width: 18rem;">
+<a href="{{path('account_password')}}">
+  <img class="card-img-top" src="{{asset('/assets/icon/account.png')}}" alt="Card image cap" class ="rounded mx-auto d-block" style ="width : 50px;">
+  <div class="card-body">
+    <p class="card-text">Accedez à la gestion de votre mot de passe.</p>
+  </div>
+</a>
+</div>
+</div>
+
+<div class="col-mb-3 ml-5 mb-3">
+<div class="card" style="width: 18rem;">
+<a href="{{path('account_address')}}">
+  <img class="card-img-top" src="{{asset('/assets/icon/address.png')}}" alt="Card image cap" class ="rounded mx-auto d-block" style ="width : 50px;">
+  <div class="card-body">
+    <p class="card-text">Accedez à la gestion de vos adresse.</p>
+  </div>
+</a>
+</div>
+</div>
+
+<div class="col-mb-3 ml-5 mb-3">
+<div class="card" style="width: 18rem;">
+    <a href="{{path('account_orders')}}">
+    <img class="card-img-top" src="{{asset('/assets/icon/shop.png')}}" class ="rounded mx-auto d-block" style ="width : 50px;" >
+    <div class="card-body">
+        <p class="card-text">Accedez à la gestion de vos Commandes</p>
+    </div>
+    </a>
+</div>
+</div>
+</div>
  <hr>
 {% endblock %}

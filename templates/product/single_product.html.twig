@@ -1,9 +1,12 @@
 <a href="{{ path('product_slug', {'slug' : product.slug }) }}" class ="text-decoration-none text-secondary">    
                         
                     <img src="/uploads/{{product.image}}" class="card-img-top" alt="{{product.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
+                    <div class="card-body shadow-sm p-3 mb-5 bg-white rounded">
+                        <h5 class="card-title"><strong>{{product.name}}</strong></h5>
                         <p class="card-text"><small>{{product.subtitle}}</small></p>
-                        <span> {{(product.prix / 100) | number_format (2,',')}}€</span></a>                    
-                    </div>
-                </a>
+                        <span class ="float-right mr-3"> <small> <strong> {{(product.price / 100) | number_format (2,',')}}€</span></small></strong></a>
+                         <a href ="{{ path('add_to_cart', { 'id' : product.id })}}" class="btn btn-info float-center w-100 mt-2 "><img src="{{ asset ('assets/icon/shopping-cart.png')}}" alt=""></a>                   
+                         <hr>
+                    </div>            
+
+
