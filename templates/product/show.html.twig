@@ -32,8 +32,7 @@
                 </div>            
             </div>
         </div>
-    </div>
-
+    </div>    
     {% if best |length != 0 %}  
     <hr>
     <h3 class="mt-3"> <strong> Nos Produit les plus achetés</strong></h3>
@@ -45,6 +44,46 @@
                 {% endfor %}
         </div>
      {% endif %}
-     
+
+    {# Système de commentaire  #}
+    {% if comments |length != 0 %}
+
+          {% if comment == 2 %}
+
+            {% for com in comments %}
+            {{com.title}}        <br>    
+            {{com.comment}}<br>
+            {{com.note}}<br>
+            {% endfor %}  
+
+            {% elseif comment == 1 %}
+
+                Ajouter un commentaire<br>
+            {% for com in comments %}
+            {{com.title}}        <br>    
+            {{com.comment}}<br>
+            {{com.note}}<br>
+            {% endfor %} 
+
+            {% else %}
+
+             Ce connecter pour ajouter un commentaire ? <br>
+            {% for com in comments %}
+            {{com.title}}        <br>    
+            {{com.comment}}<br>
+            {{com.note}}<br>
+            {% endfor %} 
+
+            {% endif %}    
+        
+ 
+        {%else%}
+            {% if comment == 1  %}
+                Ajouter un commentaire <br>
+                {% else %}
+                Ce connecter pour ajouter un commentaire ?
+            {% endif %}
+            Aucun commentaire disponible
+     {% endif %}      
 </div>
 {% endblock %}

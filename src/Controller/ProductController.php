@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\Search;
+use App\Entity\Comment;
 use App\Entity\Product;
 use App\Form\SearchType as FormSearchType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,15 +47,42 @@ class ProductController extends AbstractController
     {
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
         $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
+
         if (!$product) {
             return $this->redirectToRoute('products');
         }
+
+        //récupérer l'utilisateur si commentaire ou déconnecté ->
+        $idProduct = $product ->getId();
+
+        $comment = null;
+
+        $comments = $this->entityManager->getRepository(Comment::class)->findById($idProduct);
+        $com = $this->entityManager->getRepository(Comment::class)->findMyComment($idProduct, $this->getUser());
+        $user = $this->getUser();
+
+        if ($user && $com) {
+             $comment = 2;
+        } elseif ($user && !$com) {
+             $comment = 1;
+        } else {
+            $comment = 0;
+        }
+
+
+
+        // récupérer table commentaire les afficher!
+
+        //sinon pas de commentaire et connecté ->
+        // proposer de l'ajouter
 
         return $this->render(
             'product/show.html.twig',
             [
             'product' => $product,
-            'best' => $best
+            'best' => $best,
+            'comment' => $comment,
+            'comments' => $comments
             ]
         );
     }

@@ -1,5 +1,11 @@
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
 main {
-  height: 100vh;
+  height: 100%;
 }
 .navbar-item-custom a {
   color: white;
@@ -14,8 +20,6 @@ footer {
   text-align: center;
   /* position: fixed;
   bottom: 0px;*/
-  height: 12%;
-  width: 100%;
   background-color: #dfeaff;
 }
 

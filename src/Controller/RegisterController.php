@@ -51,14 +51,12 @@ class RegisterController extends AbstractController
                 $this->entityManager->persist($user);
 
                 $this->entityManager->flush();
-
+                $this->redirectToRoute('app_login');
                 $notification = 'Votre inscription à était prise en compte';
 
                 $mail = new Mail();
                 $content = "Bonjour, " . $user->getFirstname() . " <br> nous sommes ravies de vous avoir sur notre projet de boutique.";
                 $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur notre boutique', $content);
-
-                $this->redirectToRoute('app_login');
             }
         }
 
