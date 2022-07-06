@@ -55,8 +55,9 @@
         </div>
      {% endif %}
 
+<div class="container">
     {# Système de commentaire  #}
-    {% if comments |length != 0 %}
+    {% if comments |length != 0 %}        
 
           {% if commentStatut == 2 %}
 
@@ -76,27 +77,42 @@
             {% endfor %} 
 
             {% else %}
-
-            <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>
-             <br>
+            <div class="mb-2">
+            <div class ="border p-2 row" >
+                <div class ="col-12">
+                    <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>
+                </div>
+            </div>
+            
             {% for com in comments %}
-            {{com.title}}        <br>    
-            {{com.comment}}<br>
-            {{com.note}}<br>
+            <div class="border p-2 row">            
+                <div class ="col-10"><strong> {{com.title}} </strong></div> 
+                <div class ="col-2">{{com.note}}</div> 
+                <div class="col-12 mt-2">{{com.comment}}</div>           
+            </div>
             {% endfor %} 
-
+            </div>
             {% endif %}    
         
  
         {%else%}
             {% if commentStatut == 1  %}
-                Ajouter un commentaire <br>
-                {{form(form)}}
+            <div class="mb-2">
+                <div class="border p-2 row">
+                    <div class="col-12">
+                        Ajouter un commentaire <br>
+                        {{form(form)}}                    
+                    </div>
+                    div
+                </div>
+            </div>
+
                  Aucun commentaire disponible
                 {% else %}
                 <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>                
                  Aucun commentaire disponible
             {% endif %}           
-     {% endif %}      
+     {% endif %}    
+     </div>  
 </div>
 {% endblock %}
