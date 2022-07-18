@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController extends AbstractController
 {
+    private $entityManager;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this-> entityManager = $entityManager;

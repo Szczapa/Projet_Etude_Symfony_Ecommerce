@@ -3,68 +3,68 @@
 {% block title %}Hello CartController!{% endblock %}
 
 {% block content %}
-    <div class=" float-right"> <a href="{{path('products')}}" class="btn btn-info"> Continuer mes Achats</a> </div>
-    <h1>Mon panier</h1> 
+<div class=" float-right"> <a href="{{path('products')}}" class="btn btn-info"> Continuer mes Achats</a> </div>
+<h1>Mon panier</h1>
 
-    <p>Vos Produit vous attendes :</p>
-    {% if cart|length !=0 %}
-    <table class="table table-striped">
+<p>Vos Produit vous attendes :</p>
+{% if cart|length !=0 %}
+<table class="table table-striped">
     <thead>
         <tr>
-            <th scope ='col'>image</th>
-            <th scope ='col'></th>
-            <th scope ='col'>Prix</th>
-            <th scope ='col'>Quantité</th>
-            <th scope ='col'>total</th>
-            <th scope ='col'></th>
+            <th scope='col'>image</th>
+            <th scope='col'></th>
+            <th scope='col'>Prix</th>
+            <th scope='col'>Quantité</th>
+            <th scope='col'>total</th>
+            <th scope='col'></th>
         </tr>
     </thead>
 
     <tbody>
-    {% set total = null %}
-    {% for product in cart %}   
+        {% set total = null %}
+        {% for product in cart %}
         <tr>
             <td>
-                <img src="/uploads/{{product.product.image}}" alt="{{product.product.name}}" height="75px">                
+                <img src="/uploads/{{product.product.image}}" alt="{{product.product.name}}" height="75px">
             </td>
             <td>{{product.product.name}}</td>
-            <td>{{(product.product.price / 100) | number_format (2,',')}} € <small>Tva Incluse</small</td>
-            <td>
-                <a href="{{path ('decrease_to_cart', { 'id' :product.product.id})}}">
-                    <img src="{{asset('assets/icon/remove.png')}}" alt="supprimer" height="13">
-                </a>
-                {{product.quantity}}
-                <a href="{{path ('add_to_cart', { 'id' :product.product.id})}}">
-                    <img src="{{asset('assets/icon/add.png')}}" alt="supprimer" height="13">
-                </a>                
-            </td>   
-            <td>{{((product.product.price * product.quantity) / 100) | number_format (2,',')}} € <small>Tva Incluse</small></td>   
+            <td>{{(product.product.price / 100) | number_format (2,',')}} € <small>Tva Incluse</small</td> <td>
+                    <a href="{{path ('decrease_to_cart', { 'id' :product.product.id})}}">
+                        <img src="{{asset('assets/icon/remove.png')}}" alt="supprimer" height="13">
+                    </a>
+                    {{product.quantity}}
+                    <a href="{{path ('add_to_cart', { 'id' :product.product.id})}}">
+                        <img src="{{asset('assets/icon/add.png')}}" alt="supprimer" height="13">
+                    </a>
+            </td>
+            <td>{{((product.product.price * product.quantity) / 100) | number_format (2,',')}} € <small>Tva
+                    Incluse</small></td>
             <td>
                 <a href="{{path ('delete_from_cart',{ 'id' :product.product.id})}}">
                     <img src="{{asset('assets/icon/poubelle.png')}}" alt="supprimer" height="13"></td>
-                </a>
+            </a>
         </tr>
-    {% set total = total + (product.product.price * product.quantity) %}
-    {% endfor %}
+        {% set total = total + (product.product.price * product.quantity) %}
+        {% endfor %}
     </tbody>
     <tfoot>
         <td colspan="4"></td>
-        <td >
+        <td>
             <b>Nombre de Produit : </b> <small>{{cart|length}}</small> <br>
             <b>Total :</b> {{((total) / 100) | number_format (2,',')}} € <small>Tva Incluse</small>
         </td>
     </tfoot>
-    </table>
-    <div>
+</table>
+<div>
     <a href="{{path('order')}}">
         <button class="btn btn-success btn-block">
             Valider le panier
         </button>
     </a>
-    </div>
-    {% else %}
-        <hr> <strong>
-            Ce panier est vide
-        </strong>
-    {% endif %} 
+</div>
+{% else %}
+<hr> <strong>
+    Ce panier est vide
+</strong>
+{% endif %}
 {% endblock %}

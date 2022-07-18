@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Classes\Search;
 use App\Entity\Comment;
 use App\Entity\Favoris;
@@ -8,7 +9,6 @@ use App\Entity\Product;
 use App\Form\CommentType;
 use App\Form\SearchType as FormSearchType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+    private $entityManager;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this-> entityManager = $entityManager;
@@ -53,17 +55,17 @@ class ProductController extends AbstractController
         if (!$product) {
             return $this->redirectToRoute('products');
         }
-        
+
         $idProduct = $product ->getId();
 
 
-        // Partie Commentaire du produit 
+        // Partie Commentaire du produit
         $commentStatut = null;
 
         $comments = $this->entityManager->getRepository(Comment::class)->findByProduct($idProduct);
-        $user = $this->getUser();    
-        $com = $this->entityManager->getRepository(Comment::class)->findMyComment($idProduct,$user);        
-        
+        $user = $this->getUser();
+        $com = $this->entityManager->getRepository(Comment::class)->findMyComment($idProduct, $user);
+
         $create = new Comment();
         $form = $this -> createForm(CommentType::class, $create);
         $form->handleRequest($request);
@@ -89,9 +91,11 @@ class ProductController extends AbstractController
             $commentStatut = 0;
         }
 
+        $fav = $this->entityManager->getRepository(Favoris::class)->findOneBy(["product" => $idProduct,"user" => $user, "favoris" => 1]);
+
         $favori = false;
-        $fav = $this->entityManager->getRepository(Favoris::class)->findMyFav($idProduct,$user,1) ;
-        if($fav){
+
+        if ($fav) {
             $favori = true;
         }
 
@@ -102,68 +106,63 @@ class ProductController extends AbstractController
             'best' => $best,
             'commentStatut' => $commentStatut,
             'comments' => $comments,
-            'form' => $form->createView(), 
-            'favori'=>$favori,           
+            'form' => $form->createView(),
+            'favori' => $favori,
             ]
         );
     }
 
     #[Route('/favori/add/{slug}', name: 'add_to_fav')]
-    public function favoris(string $slug) 
-    {  
+    public function favoris(string $slug)
+    {
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
         $user = $this->getUser();
         $idProduct = $product ->getId();
 
-        if (!$product){
+        if (!$product) {
             return $this->redirectToRoute('product');
         }
 
         if (!$user) {
-           return $this->redirectToRoute('product_slug',['slug' => $slug]);
+            return $this->redirectToRoute('product_slug', ['slug' => $slug]);
            //erreur veuillez vous connecter
         }
 
-        $fav = $this->entityManager->getRepository(Favoris::class)->findMyFav($idProduct,$user,1);
+        $fav = $this->entityManager->getRepository(Favoris::class)->findMyFav($idProduct, $user, 1);
 
-        if(!$fav && $user){
+        if (!$fav && $user) {
             $favoris = new Favoris();
             $favoris ->setUser($user);
             $favoris->SetProduct($product);
             $favoris->setFavoris(1);
             $this->entityManager->persist($favoris);
-            $this->entityManager->flush();    
-            
-        }       
-      return $this->redirectToRoute('product_slug',['slug' => $slug]);
+            $this->entityManager->flush();
+        }
+        return $this->redirectToRoute('product_slug', ['slug' => $slug]);
     }
 
     #[Route('/favori/remove/{slug}', name: 'remove_to_fav')]
     public function favori(string $slug)
-    {  
+    {
 
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
         $user = $this->getUser();
         $idProduct = $product ->getId();
 
-        if (!$product){
+        if (!$product) {
             return $this->redirectToRoute('product');
         }
 
         if (!$user) {
-           return $this->redirectToRoute('product_slug',['slug' => $slug]);
-           //erreur veuillez vous connecter
+            return $this->redirectToRoute('product_slug', ['slug' => $slug]);
         }
 
-        $fav = $this->entityManager->getRepository(Favoris::class)->findOneBy(["product" => $idProduct,"user" => $user, "favoris" =>1] );
+        $fav = $this->entityManager->getRepository(Favoris::class)->findOneBy(["product" => $idProduct,"user" => $user, "favoris" => 1]);
 
-        if($fav && $user){            
-            $fav ->setUser($user);
-            $fav->SetProduct($product);
-            $fav->setFavoris(0);            
-            $this->entityManager->flush();            
-        return $this->redirectToRoute('product_slug',['slug' => $slug]);
+        if ($fav && $user) {
+            $this->entitManager->remove($fav);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('product_slug', ['slug' => $slug]);
         }
-      
     }
 }

@@ -47,7 +47,7 @@ class FavorisRepository extends ServiceEntityRepository
         }
     }
 
-        public function findMyFav($idProduct, $user)
+    public function findMyFav($idProduct, $user)
     {
         return $this->createQueryBuilder('o')
         ->andWhere('o.product = :idProduct ')

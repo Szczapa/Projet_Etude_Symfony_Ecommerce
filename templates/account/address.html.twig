@@ -4,40 +4,43 @@
 
 {% block content %}
 <a href="{{path('account')}}" class="text-decoration-none text-info">
-    <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height = "15px">
+    <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height="15px">
     Mon compte
 </a>
 <a href="{{path('account_address_add')}}" class="btn btn-info btn-sm float-right"> Ajouter une adresse</a><br>
-<h1 class ="mt-4"> <strong> Mes adresses</strong></h1>
+<h1 class="mt-4"> <strong> Mes adresses</strong></h1>
 <p>Bienvenue <strong>{{app.user.firstname}}</strong> sur ta fiche d'adresses</p>
 <hr>
 {% if app.user.addresses|length !=0 %}
 <div class="row">
-{% for address in app.user.addresses %}   
-<div class="col-md4">
-  <div class="card mb-3 mr-2" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{address.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{address.firstname}} {{address.lastname}} </h6>
-        <p class="card-text">{{address.address}} <br>
-        <small>{{address.postal}}</small> {{address.city}} <br>
-        {{address.country}}
-        {% if address.Company != null %}
-        <small class="text-muted">{{address.Company}}</small>
-        {% endif %} <br>
-        {{address.phone}}
-        </p>
+    {% for address in app.user.addresses %}
+    <div class="col-md4">
+        <div class="card mb-3 mr-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{address.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{address.firstname}} {{address.lastname}} </h6>
+                <p class="card-text">{{address.address}} <br>
+                    <small>{{address.postal}}</small> {{address.city}} <br>
+                    {{address.country}}
+                    {% if address.Company != null %}
+                    <small class="text-muted">{{address.Company}}</small>
+                    {% endif %} <br>
+                    {{address.phone}}
+                </p>
 
+            </div>
+            <div class="card-footer">
+                <a href="{{path ('account_address_edit', {'id':address.id})}}"
+                    class="card-link btn btn-info">Modifier</a>
+                <a href="{{path ('account_address_delete', {'id':address.id})}}"
+                    class="card-link btn btn-danger float-right">Supprimer</a>
+            </div>
+        </div>
     </div>
-    <div class="card-footer">
-        <a href="{{path ('account_address_edit', {'id':address.id})}}" class="card-link btn btn-info">Modifier</a>
-        <a href="{{path ('account_address_delete', {'id':address.id})}}" class="card-link btn btn-danger float-right">Supprimer</a>    
-    </div>
-</div>
-</div>
-{% endfor %}
+    {% endfor %}
 </div>
 {% else %}
-<p class ="text-center">Vous n'avez aucune adresses, pour en ajouter une <a href="{{path('account_address_add')}}" class="text-decoration-none">cliquer ici</a></p>
+<p class="text-center">Vous n'avez aucune adresses, pour en ajouter une <a href="{{path('account_address_add')}}"
+        class="text-decoration-none">cliquer ici</a></p>
 {% endif %}
 {% endblock %}

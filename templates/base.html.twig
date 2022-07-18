@@ -30,10 +30,11 @@
                 font-size: 3.5rem;
             }
         }
-    </style>    
+    </style>
 </head>
 
 {# <body class="d-flex flex-column vh-100"> #}
+
 <body>
     <header>
 
@@ -63,7 +64,7 @@
                         href="{{path ('register')}}">Inscription</a>
                     {% endif %}
                     <a href="{{path('cart')}}">
-                        <img src="{{ asset ('assets/icon/shopping-cart.png')}}" alt="panier" class ="cart-icon">
+                        <img src="{{ asset ('assets/icon/shopping-cart.png')}}" alt="panier" class="cart-icon">
                     </a>
                 </div>
             </div>
@@ -73,26 +74,29 @@
     <main role="main">
 
         {% if block ('carousel') is defined %}
-        
+
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-            {% for key, header in headers %}            
-                <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %} class="active"{% endif %}></li>
-            {% endfor %}
+                {% for key, header in headers %}
+                <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %}>
+                </li>
+                {% endfor %}
             </ol>
             <div class="carousel-inner">
-                    {% for key, header in headers %}
-                <div class="carousel-item {% if key == 0 %} active {% endif %}" style="background: url('/uploads/{{header.image}}'); background-size:cover;">                    
+                {% for key, header in headers %}
+                <div class="carousel-item {% if key == 0 %} active {% endif %}"
+                    style="background: url('/uploads/{{header.image}}'); background-size:cover;">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>{{header.title}}</h1>
                             <p>{{header.content}}</p>
-                            <p><a class="btn btn-lg btn-info" href="{{header.btnUrl}}" target = "_blank" role="button">{{header.btnTitle}}</a></p>
+                            <p><a class="btn btn-lg btn-info" href="{{header.btnUrl}}" target="_blank"
+                                    role="button">{{header.btnTitle}}</a></p>
                         </div>
                     </div>
                 </div>
-                    {% endfor %}
-            </div>                        
+                {% endfor %}
+            </div>
 
             <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -115,10 +119,10 @@
 
 
     </main>
-        <footer class="footer py-3">
-            <p class="pt-2">&copy; 2022 Ma compagnie, Inc. &middot; <a href="#">Privacy</a> &middot;
-             <a href="#">Terms</a></p>
-        </footer>
+    <footer class="footer py-3">
+        <p class="pt-2">&copy; 2022 Ma compagnie, Inc. &middot; <a href="#">Privacy</a> &middot;
+            <a href="#">Terms</a></p>
+    </footer>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

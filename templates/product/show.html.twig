@@ -10,109 +10,137 @@
         </div>
         <div class="col ">
             <div class="container pt-5">
-                <div class="mb-4">                
-                    <h3><strong>{{product.name}} <small class ="text-info">#{{product.category}}</small></strong></h3>                    
-                    <p>  <small><strong>{{product.subtitle}}</strong></small></p>                    
+                <div class="mb-4">
+                    <h3><strong>{{product.name}} <small class="text-info">#{{product.category}}</small></strong></h3>
+                    <p> <small><strong>{{product.subtitle}}</strong></small></p>
                 </div>
                 <p>{{product.description}}</p>
                 <hr>
                 <span>
-                   <strong> {{(product.price / 100) | number_format (2,',')}} € </strong><small>Tva Incluse</small>
+                    <strong> {{(product.price / 100) | number_format (2,',')}} € </strong><small>Tva Incluse</small>
                 </span>
                 <br>
                 <div class=" pt-3">
                     <div>
-                        <a href ="{{ path('add_to_cart', { 'id' : product.id })}}" class="btn btn-info w-75 ">Acheter</a>
+                        <a href="{{ path('add_to_cart', { 'id' : product.id })}}" class="btn btn-info w-75 ">Acheter</a>
 
-                         {% if favori != true %}
-                             <a class="btn btn-info text-light" href="{{ path('add_to_fav', { 'slug' : product.slug })}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z"/>
+                        {% if favori != true %}
+                        <a class="btn btn-info text-light" href="{{ path('add_to_fav', { 'slug' : product.slug })}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-balloon-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
                             </svg>
                         </a>
-                        {% else %} 
-                        <a class="btn btn-success text-light"  href="{{ path('remove_to_fav', { 'slug' : product.slug })}}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-balloon-heart" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z"/>
+                        {% else %}
+                        <a class="btn btn-success text-light" href="{{ path('remove_to_fav', { 'slug' : product.slug })}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-balloon-heart" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
                             </svg>
                         </a>
-                         {% endif %} 
-
+                        {% endif %}
+                        
                     </div>
-                </div>            
+                </div>
             </div>
         </div>
-    </div>    
-    {% if best |length != 0 %}  
+    </div>
+    {% if best |length != 0 %}
     <hr>
     <h3 class="mt-3"> <strong> Nos Produit les plus achetés</strong></h3>
-        <div class="row">
-                {% for product in best %}
-                <div class="col-md-3">
-                    {% include "product/single_product.html.twig" %}
+    <div class="row">
+        {% for product in best %}
+        <div class="col-md-3">
+            {% include "product/single_product.html.twig" %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="container">
+        {# Système de commentaire  #}
+        {% if comments |length != 0 %}
+
+        {% if commentStatut == 2 %}
+        <div class="mb-2">
+            <div class="border p2 row">
+                {% for com in comments %}
+                <div class="col-12">
+                    {{com.title}}<br>
+                    {{com.comment}}<br>
+                    {{com.note}}<br>
                 </div>
                 {% endfor %}
+            </div>
         </div>
-     {% endif %}
 
-<div class="container">
-    {# Système de commentaire  #}
-    {% if comments |length != 0 %}        
+        {% elseif commentStatut == 1 %}
+        <div class="mb-2">
+            <div class="border p-2 row">
+                <div class="col-12">
+                    <p> Ajouter un commentaire</p><br>
+                    {{form(form)}}
+                </div>
+                {% for com in comments %}
+                <div class="col-12">
+                    {{com.title}}<br>
+                    {{com.comment}}<br>
+                    {{com.note}}<br>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
 
-          {% if commentStatut == 2 %}
-
-            {% for com in comments %}
-            {{com.title}}        <br>    
-            {{com.comment}}<br>
-            {{com.note}}<br>
-            {% endfor %}  
-
-            {% elseif commentStatut == 1 %}
-            Ajouter un commentaire<br>
-            {{form(form)}}
-            {% for com in comments %}
-            {{com.title}}        <br>    
-            {{com.comment}}<br>
-            {{com.note}}<br>
-            {% endfor %} 
-
-            {% else %}
-            <div class="mb-2">
-            <div class ="border p-2 row" >
-                <div class ="col-12">
+        {% else %}
+        <div class="mb-2">
+            <div class="border p-2 row">
+                <div class="col-12">
                     <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>
                 </div>
             </div>
-            
             {% for com in comments %}
-            <div class="border p-2 row">            
-                <div class ="col-10"><strong> {{com.title}} </strong></div> 
-                <div class ="col-2">{{com.note}}</div> 
-                <div class="col-12 mt-2">{{com.comment}}</div>           
+            <div class="border p-2 row">
+                <div class="col-10"><strong> {{com.title}} </strong></div>
+                <div class="col-2">{{com.note}}</div>
+                <div class="col-12 mt-2">{{com.comment}}</div>
             </div>
-            {% endfor %} 
-            </div>
-            {% endif %}    
-        
- 
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
         {%else%}
-            {% if commentStatut == 1  %}
-            <div class="mb-2">
-                <div class="border p-2 row">
-                    <div class="col-12">
-                        Ajouter un commentaire <br>
-                        {{form(form)}}                    
-                    </div>
-                    div
+
+        {% if commentStatut == 1  %}
+        <div class="mb-2">
+            <div class="border p-2 row">
+                <div class="col-12">
+                    <strong>
+                        <p class="mb-1"> Ajouter un commentaire </p>
+                    </strong> <br>
+                    {{form(form)}}
+                </div>
+                <div class="col-12">
+                    <strong>
+                        <p> Aucun commentaire disponible </p>
+                    </strong>
                 </div>
             </div>
+        </div>
 
-                 Aucun commentaire disponible
-                {% else %}
-                <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>                
-                 Aucun commentaire disponible
-            {% endif %}           
-     {% endif %}    
-     </div>  
+        {% else %}
+        <div class="mb-2">
+            <div class="border p-2 row">
+                <div class="col-12"><a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a></div>
+                <div class="col-12">
+                    <p>Aucun commentaire disponible</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

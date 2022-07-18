@@ -3,8 +3,8 @@
 {% block title %}Recapitulatif et paiement!{% endblock %}
 
 {% block javascript %}
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,42 +14,46 @@
 <div class="row">
 
     <div class="col-md-6">
-    <b>Recap de commande :</b> <br>
-    <hr>
-    <strong>Mon adressse :</strong>
-    {{delivery|raw}}
-    <hr>
-    <strong>Mon transporteur : </strong><br>
-    {{carrier.name}} <br>
-    {{carrier.description}} <br>
-    {{(carrier.price / 100) | number_format (2,',')}} € <small>Tva Incluse</small>
+        <b>Recap de commande :</b> <br>
+        <hr>
+        <strong>Mon adressse :</strong>
+        {{delivery|raw}}
+        <hr>
+        <strong>Mon transporteur : </strong><br>
+        {{carrier.name}} <br>
+        {{carrier.description}} <br>
+        {{(carrier.price / 100) | number_format (2,',')}} € <small>Tva Incluse</small>
 
     </div>
     {% set total = null %}
     <div class="col-md-6">
         {% for key, product in cart %}
-            <div class="row" {% if key > 0 %}mt-2{% endif %}>
-                <div class="col-2"> <img src="/uploads/{{product.product.image}}" alt="{{product.product.name}}" height="75px"></div>
-                <div class="col-8 my-auto">{{product.product.name}} <br>
+        <div class="row" {% if key > 0 %}mt-2{% endif %}>
+            <div class="col-2"> <img src="/uploads/{{product.product.image}}" alt="{{product.product.name}}"
+                    height="75px"></div>
+            <div class="col-8 my-auto">{{product.product.name}} <br>
                 <small>{{product.product.subtitle}}</small> <br>
-                    X {{product.quantity}} </div>
-                <div class="col-2 my-auto">
-                {{((product.product.price * product.quantity) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>
-                </div>
+                X {{product.quantity}} </div>
+            <div class="col-2 my-auto">
+                {{((product.product.price * product.quantity) / 100) | number_format (2,',','.')}} € <small>Tva
+                    Incluse</small>
             </div>
-                {% set total = total + (product.product.price * product.quantity) %}
-        {% endfor %}     
-        <hr>
-        
-        <strong>Sous-Total :</strong> {{((total) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>   <br>
-        <strong>Livraison :</strong> {{(carrier.price / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>   <br>
-        <hr>
-        <strong>Total :</strong> </strong> {{(((total) / 100) + (carrier.price / 100)) | number_format (2,',')}} € <small>Tva Incluse</small>   <br>
+        </div>
+        {% set total = total + (product.product.price * product.quantity) %}
+        {% endfor %}
         <hr>
 
-    <form action="/commande/create-session/{{reference}}" method="POST">
-        <button type="submit" id="checkout-button" class="btn btn-success btn-block">Payer</button>
-    </form>
+        <strong>Sous-Total :</strong> {{((total) / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small> <br>
+        <strong>Livraison :</strong> {{(carrier.price / 100) | number_format (2,',','.')}} € <small>Tva Incluse</small>
+        <br>
+        <hr>
+        <strong>Total :</strong> </strong> {{(((total) / 100) + (carrier.price / 100)) | number_format (2,',')}} €
+        <small>Tva Incluse</small> <br>
+        <hr>
+
+        <form action="/commande/create-session/{{reference}}" method="POST">
+            <button type="submit" id="checkout-button" class="btn btn-success btn-block">Payer</button>
+        </form>
     </div>
 </div>
 {% endblock %}

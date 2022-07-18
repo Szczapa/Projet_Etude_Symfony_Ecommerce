@@ -3,23 +3,23 @@
 {% block title %}Ma commandes {{order.reference}}!{% endblock %}
 
 {% block content %}
-<h1 class ="mt-4"> <strong> Ma commande </strong> {{order.reference}}</h1>
+<h1 class="mt-4"> <strong> Ma commande </strong> {{order.reference}}</h1>
 <a href="{{path('account_orders')}}" class="text-decoration-none text-info">
-    <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height = "15px">
-    Mes Commandes
+  <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height="15px">
+  Mes Commandes
 </a>
 <hr>
-<strong> commande faite le : </strong>  {{order.createdAt|date('d/m/Y')}} <br>
+<strong> commande faite le : </strong> {{order.createdAt|date('d/m/Y')}} <br>
 <strong>Statut :</strong> {% if order.state == 1 %}
-          Payée
-        {% elseif order.state == 2 %}
-          En préparation
-        {% elseif order.state == 3 %}
-          En Livraison
-      {% endif %} <br>
+Payée
+{% elseif order.state == 2 %}
+En préparation
+{% elseif order.state == 3 %}
+En Livraison
+{% endif %} <br>
 <strong> Référence de la commande : </strong> {{order.reference}} <br>
 <strong> Transporteur choisis : </strong> {{order.carrierName}} <br>
-<strong> Détails : </strong> 
+<strong> Détails : </strong>
 <table class="table">
   <thead>
     <tr>
@@ -30,19 +30,19 @@
     </tr>
   </thead>
   <tbody>
-  {% for product in order.orderDetails %}  
-    <tr>      
+    {% for product in order.orderDetails %}
+    <tr>
       <td>{{product.product}}</td>
       <td>X {{product.quantity}}</td>
       <td>{{(product.price/100)|number_format(2, ',')}} €</td>
       <td>{{(product.total/100)|number_format(2, ',')}} €</td>
-    </tr> 
+    </tr>
     {% endfor %}
   </tbody>
 </table>
 <div class="text-right">
-    <strong> Sous-total:{{(order.getTotal /100)|number_format(2, ',')}} €</strong> <br>
-    <strong> Livraison:{{(order.carrierPrice /100)|number_format(2, ',')}} €</strong> <br>
-    <strong> Total:{{((order.carrierPrice + order.getTotal) /100 )|number_format(2, ',')}} €</strong>
+  <strong> Sous-total:{{(order.getTotal /100)|number_format(2, ',')}} €</strong> <br>
+  <strong> Livraison:{{(order.carrierPrice /100)|number_format(2, ',')}} €</strong> <br>
+  <strong> Total:{{((order.carrierPrice + order.getTotal) /100 )|number_format(2, ',')}} €</strong>
 </div>
 {% endblock %}

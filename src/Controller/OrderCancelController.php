@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class OrderCancelController extends AbstractController
 {
     private $entityManager;
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;

@@ -4,11 +4,11 @@
 
 {% block content %}
 <a href="{{path('account')}}" class="text-decoration-none text-info">
-    <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height = "15px">
-    Mon compte
+  <img src="{{ asset ('assets/icon/back.png')}}" alt="Retour" height="15px">
+  Mon compte
 </a>
 
-<h1 class ="mt-4"><strong> Mes Commandes </strong></h1>
+<h1 class="mt-4"><strong> Mes Commandes </strong></h1>
 <p>Bienvenue <strong>{{app.user.firstname}}</strong> sur ton récapitulatif de commande</p>
 
 {% if orders |length !=0 %}
@@ -23,25 +23,27 @@
     </tr>
   </thead>
   <tbody>
-{% for order in orders %}
+    {% for order in orders %}
     <tr>
       <td>{{order.createdAt|date('d/m/Y')}}</td>
       <td>{% if order.state == 1 %}
-          Payée
+        Payée
         {% elseif order.state == 2 %}
-          En préparation
+        En préparation
         {% elseif order.state == 3 %}
-          En Livraison
-      {% endif %}</td>
+        En Livraison
+        {% endif %}</td>
       <td>{{order.reference}}</td>
       <td>{{order.orderDetails|length}}</td>
       <td>{{((order.carrierPrice + order.getTotal)/100)|number_format(2, ',')}} €</td>
-      <td class='text-right'><a href="{{path('account_order', {'reference' : order.reference})}}">Voir ma commande</a></td>
+      <td class='text-right'><a href="{{path('account_order', {'reference' : order.reference})}}">Voir ma commande</a>
+      </td>
     </tr>
-{% endfor %}
+    {% endfor %}
   </tbody>
 </table>
 {% else %}
-<p class ="text-center">Vous n'avez passé aucune commande pour aller à la boutique <a href="{{path('home')}}" class="text-decoration-none"> <strong> cliquer ici </strong></a></p>
+<p class="text-center">Vous n'avez passé aucune commande pour aller à la boutique <a href="{{path('home')}}"
+    class="text-decoration-none"> <strong> cliquer ici </strong></a></p>
 {% endif %}
 {% endblock %}
