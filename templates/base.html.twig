@@ -113,9 +113,20 @@
     ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
 
-        <div class="container marketing  {% if block ('carousel') is not defined %} mt-5 {% endif %}">
-            {% block content %}{% endblock %}
-        </div>
+        {% if block ('actualite')is not defined %}
+            <div class="container marketing  {% if block ('carousel') is not defined %} mt-5 {% endif %}">
+                {% block content %}{% endblock %}
+            </div>
+        {% else %}
+            <div class="actu-background">
+                {% block actualite %}                    
+                {% endblock %}
+            </div>
+        {% endif %}
+        
+
+
+      
 
 
     </main>

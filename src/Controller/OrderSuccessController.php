@@ -34,7 +34,7 @@ class OrderSuccessController extends AbstractController
 
             $mail = new Mail();
             $content = "Bonjour, " . $order->getUser()->getFirstname() . " <br> nous sommes ravies que vous ayez passé commande chez nous ! La commande est désormais en préparation.";
-            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Bienvenue sur notre boutique', $content);
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Merci de votre commande', $content);
         }
 
         return $this->render(

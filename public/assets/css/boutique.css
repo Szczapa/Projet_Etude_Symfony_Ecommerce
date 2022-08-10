@@ -58,3 +58,33 @@ footer {
   background-color: aliceblue;
   border-radius: 10px;
 }
+
+.notation {
+  color: rgb(142, 140, 140);
+}
+
+.size-forced {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.size-forced .card-body {
+  flex: none;
+}
+
+.actu-background {
+  padding-top: 3rem;
+  background-color: rgb(66, 66, 66);
+  height: 100vh;
+  width: 100vw;
+}
+.background-actu {
+  background-color: rgb(255, 255, 255);
+  height: 100vh;
+  padding-top: 1rem;
+}
+.post-image {
+  height: auto;
+  width: 230px;
+}

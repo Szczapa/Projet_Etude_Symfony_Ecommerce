@@ -44,7 +44,7 @@ class ResetPasswordController extends AbstractController
 
                 $mail = new Mail();
                 $content = "Bonjour, " . $User->getFirstname() . " <br> Vous venez de faire une demande de reset de mot de passe <br>";
-                $content .= "<a href ='" . $url . "'> cliquez ici pour le modifier</a>                 
+                $content .= "<a href =' . $url . '> cliquez ici pour le modifier</a>                 
                  <br> Si cette demande ne vient pas de vous veuillez vous connecter et changer de mot de passe";
                 $mail->send($User->getEmail(), $User->getFirstname(), 'Reset de mot de passe', $content);
                 $this->addFlash('notice', 'Email de récupération envoyé');

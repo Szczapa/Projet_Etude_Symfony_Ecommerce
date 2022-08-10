@@ -34,4 +34,25 @@ class ActualityController extends AbstractController
             'post' => $post
         ]);
     }
+
+    #[Route('/admin/actuality/check', name: 'actuality_check')]
+    public function actucheck(): Response
+    {
+       return $this->render('actuality/actuality_check.html.twig', [
+           
+        ]);      
+    }
+
+    #[Route('/admin/actuality/add', name: 'actuality_add')]
+    public function createactu()
+    {
+
+    }
+
+    #[Route('/actuality/remove', name: 'actuality_remove')]
+    public function removeactu()
+    {
+       
+        
+    }
 }

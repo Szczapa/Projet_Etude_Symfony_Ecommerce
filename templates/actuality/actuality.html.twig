@@ -2,16 +2,25 @@
 
 {% block title %}Actualité Geek du moment!{% endblock %}
 
-{% block content %}
-<img src="{{ asset ('assets/image/Bientot.png')}}" alt="En construction">
+{% block actualite %}
 
-
-{% if posts|length != 0 %}
-{% for post in posts %}
-Je suis post
-{% endfor %}
+<div>
+    <div class= "container background-actu">
+        {% if posts|length != 0 %}
+    {% for post in posts %}       
+        <img src="/uploads/{{post.image}}" class="post-image" alt="{{post.title}}">                
+        {{post.title}}
+        {{post.subtitle}}
+        {{post.createdAt|date("m/d/Y")}}
+        {{post.content}}
+    {% endfor %}
 {% else %}
-Aucun Post disponible
+    <img src="{{ asset ('assets/image/Bientot.png')}}" alt="En construction">
+    {# Aucun Post disponible #}
 {% endif %}
+    </div>
+</div>
+
+
 
 {% endblock %}

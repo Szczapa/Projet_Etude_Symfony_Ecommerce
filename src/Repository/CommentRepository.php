@@ -59,6 +59,17 @@ class CommentRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findCommentbyprod($idProduct)
+    {
+        return $this->createQueryBuilder('c')
+        ->andWhere('c.product = :idProduct ')
+        ->setParameter('idProduct', $idProduct)
+        ->orderBy('c.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */

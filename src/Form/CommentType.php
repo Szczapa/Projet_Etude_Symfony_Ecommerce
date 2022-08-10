@@ -22,14 +22,14 @@ class CommentType extends AbstractType
                 'title',
                 TextType::class,
                 [
-                'label' => 'titre'
+                'label' => 'Titre'
                 ]
             )
             ->add(
                 'comment',
                 TextareaType::class,
                 [
-                'label' => 'commentaire'
+                'label' => 'Commentaire'
                 ]
             )
 
@@ -37,6 +37,7 @@ class CommentType extends AbstractType
                 'note',
                 ChoiceType::class,
                 [
+                'label' => 'Note',
                 'choices' => [
                     '0' => 0,
                     '1' => 1,
@@ -52,7 +53,7 @@ class CommentType extends AbstractType
                 'submit',
                 SubmitType::class,
                 [
-                'label' => 'Valider ma commande',
+                'label' => 'Valider mon commentaire',
                 'attr' => [
                     'class' => 'btn btn-success btn-block'
                 ]
