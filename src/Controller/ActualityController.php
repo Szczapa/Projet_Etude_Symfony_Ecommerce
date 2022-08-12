@@ -19,7 +19,7 @@ class ActualityController extends AbstractController
     #[Route('/actuality', name: 'actuality')]
     public function index(): Response
     {
-        $posts =  $this->entityManager->getRepository(Actuality::class)->findByPost(1);
+        $posts =  $this->entityManager->getRepository(Actuality::class)->findPostByDate();
 
         return $this->render('actuality/actuality.html.twig', [
             'posts' => $posts
@@ -38,8 +38,7 @@ class ActualityController extends AbstractController
     #[Route('/admin/actuality/check', name: 'actuality_check')]
     public function actucheck(): Response
     {
-       return $this->render('actuality/actuality_check.html.twig', [
-           
+        return $this->render('actuality/actuality_check.html.twig', [
         ]);      
     }
 
@@ -52,7 +51,6 @@ class ActualityController extends AbstractController
     #[Route('/actuality/remove', name: 'actuality_remove')]
     public function removeactu()
     {
-       
-        
+
     }
 }

@@ -47,6 +47,17 @@ class ActualityRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findPostByDate()
+    {
+        return $this->createQueryBuilder('a')
+        ->andWhere('a.post = :post ')
+        ->setParameter('post', 1)    
+        ->orderBy('a.createdAt', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     // /**
     //  * @return Actuality[] Returns an array of Actuality objects
     //  */

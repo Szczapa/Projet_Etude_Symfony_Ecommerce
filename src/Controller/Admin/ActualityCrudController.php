@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Controller\Admin;
-
+use DateTimeFieldTrait;
 use App\Entity\Actuality;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -20,18 +21,17 @@ class ActualityCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        
         return [
             TextField::new('title', 'titre'),
             TextField::new('subtitle', 'sous-titre'),
             ImageField::new('image')
-               ->setUploadDir('public/uploads/')
-               ->setBasePath('uploads/')
-               ->setUploadedFileNamePattern('[randomhash].[extension]'),
-            TextareaField::new('content', 'contenue'),
-            DateTimeField::new('createdAt', 'créé le'),
+                ->setUploadDir('public/uploads/')
+                ->setBasePath('uploads/')
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+            TextareaField::new('content', 'contenue'),            
+            DateField::new('createdAt')            ,             
             BooleanField::new('post', 'afficher')
-
-
         ];
     }
 }

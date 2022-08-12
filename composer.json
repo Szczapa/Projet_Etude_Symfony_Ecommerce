@@ -46,7 +46,9 @@
         "symfony/webapp-meta": "^1.0",
         "symfony/webpack-encore-bundle": "^1.14",
         "symfony/yaml": "6.0.*",
-        "twig/extra-bundle": "^2.12|^3.0",
+        "twbs/bootstrap-icons": "^1.9",
+        "twig/extra-bundle": "^3.4",
+        "twig/string-extra": "^3.4",
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
@@ -101,6 +103,8 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "fakerphp/faker": "^1.20",
         "symfony/debug-bundle": "6.0.*",
         "symfony/maker-bundle": "^1.0",
         "symfony/stopwatch": "6.0.*",

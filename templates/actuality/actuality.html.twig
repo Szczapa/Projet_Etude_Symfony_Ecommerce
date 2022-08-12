@@ -5,22 +5,90 @@
 {% block actualite %}
 
 <div>
-    <div class= "container background-actu">
-        {% if posts|length != 0 %}
-    {% for post in posts %}       
-        <img src="/uploads/{{post.image}}" class="post-image" alt="{{post.title}}">                
-        {{post.title}}
-        {{post.subtitle}}
-        {{post.createdAt|date("m/d/Y")}}
-        {{post.content}}
-    {% endfor %}
-{% else %}
-    <img src="{{ asset ('assets/image/Bientot.png')}}" alt="En construction">
-    {# Aucun Post disponible #}
-{% endif %}
+    <div class="loading-bar"></div>
+    <div class="background-actu">
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="admin">
+            <button><a class="text-decoration-none" href="{{ path('actuality_check')}}">admin</a></button>
+        </div>
+        {% endif %}
+        <div class='all-content'>
+            <nav id="navigation" class="navigation-side">
+                <div class="mp-level">
+                    <ul class="mp-level2">
+                        <li class="align"><a class="text-decoration-none" href="{{path ('home')}}">
+                                <div>
+                                    <div><img src="" alt="logo"></div>
+                                    <div>Acceuil</div>
+                                </div>
+                            </a></li>
+                        <li class="align"><a class="text-decoration-none" href="{{path ('products')}}">
+                                <div>
+                                    <div><img src="" alt="logo"></div>
+                                    <div>Produit</div>
+                                </div>
+                            </a></li>
+                        <li class="align">
+                            {% if app.user %}
+                            <a class="text-decoration-none" href="{{path ('account')}}">
+                                <div>
+                                    <div<i class="fa-light fa-person-biking-mountain"></i></div>
+                                    <div>{{app.user.firstname}}</div>
+                                </div>
+                            </a>
+                            <a class="text-decoration-none" href="{{path ('app_logout')}}">
+                                <div>
+                                    <div><img src="" alt="logo"></div>
+                                    <div>Deconnexion</div>
+                                </div>
+                            </a>
+                            {% else %}
+                            <a class="text-decoration-none" href="{{path ('app_login')}}">
+                                <div>
+                                    <div><i class="bi bi-person"></i></div>
+                                    <div>Connexion</div>
+                                </div>
+                            </a>
+                            <a class="text-decoration-none" href="{{path ('register')}}">
+                                <div>
+                                    <div><img src="" alt="logo"></div>
+                                    <div>Inscription</div>
+                                </div>
+                            </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class ="article">
+                {% if posts|length != 0 %}
+                {% for post in posts %}
+                <a href="{{ path('actuality_show', { 'id' : post.id })}}" class="text-decoration-none text-secondary">
+                    <div class="content-post">
+                        <div>
+                            <img src="/uploads/{{post.image}}" class="post-image" alt="{{post.title}}">
+                        </div>
+                        <div class="post-text">
+                            <div class='date-post'> <strong> {{post.createdAt|date("m/d/Y")}}</strong></div>
+                            <div>
+                                <h3 class="color-title inline-text"> {{post.title}}</h3>
+                                <h6 class="subtitle-post">{{post.subtitle}}</h6>
+                            </div>
+                            <div>
+                                <p class="size-text">{{post.content|u.truncate(300,'... Lire la suite')}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <hr>
+                {% endfor %}
+                {% else %}
+                <img src="{{ asset ('assets/image/Bientot.png')}}" alt="En construction">
+                {# Aucun Post disponible #}
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
-
-
-
 {% endblock %}
