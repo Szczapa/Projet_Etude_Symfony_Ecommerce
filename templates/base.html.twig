@@ -13,6 +13,7 @@
     <link href="{{asset("assets/css/bootstrap.min.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/css/boutique.css")}}">
     <link href="{{ asset("assets/css/carousel.css")}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     {% block javascript %}{% endblock %}
 
@@ -36,7 +37,7 @@
 
 {# <body class="d-flex flex-column vh-100"> #}
 
-<body class = "{% if  app.request.get('_route') == 'actuality' %} pt-0 {% endif %}" >
+<body class="{% if  app.request.get('_route') == 'actuality' %} pt-0 {% endif %}">
     {% if  app.request.get('_route') != 'actuality' %}
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark align-">
@@ -113,12 +114,11 @@
 
         <!-- Marketing messaging and featurettes
     ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->
-
-        {% if  app.request.get('_route') != 'actuality' and 'actuality_show' and 'actuality_check'  %}
+        <!-- Wrap the rest of the page in another container to center all the content. -->        
+        {% if  app.request.get('_route') != 'actuality'%}
         <div class="container marketing  {% if block ('carousel') is not defined %} mt-5 {% endif %}">
             {% block content %}{% endblock %}
-        </div>
+        </div>       
         {% else %}
         <div class="actu-background">
             {% block actualite %}
@@ -127,7 +127,7 @@
         {% endif %}
 
     </main>
-    
+
     <footer class="footer py-3">
         <p class="pt-2">&copy; 2022 Ma compagnie, Inc. &middot; <a href="#">Privacy</a> &middot;
             <a href="#">Terms</a></p>

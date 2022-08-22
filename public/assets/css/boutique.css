@@ -121,14 +121,14 @@ footer {
   margin-right: 10px;
 }
 
-.mp-level {
+.nb-level {
   position: sticky;
   top: 5px;
   padding: 5px;
   display: flex;
   justify-content: center;
 }
-.mp-level2 {
+.nb-level2 {
   padding: 3px;
   list-style-type: none;
   background-color: #333333;
@@ -139,7 +139,7 @@ footer {
 }
 
 .align a {
-  color: rgb(155, 200, 72);
+  color: rgb(182, 182, 182);
 }
 .content-post {
   display: flex;
@@ -198,6 +198,23 @@ footer {
   transition: transform 0.2s ease-out;
 }
 
+.hover-logo {
+  margin: 10px 5px 10px 5px;
+}
+
+.hover-logo:hover {
+  color: rgb(155, 200, 72);
+}
+
+.bi-person,
+.bi-cart,
+.bi-house,
+.bi-box-arrow-in-left,
+.bi-box-arrow-in-right,
+.bi-pen {
+  font-size: 25px;
+}
+
 @media screen and (max-width: 1160px) {
   .content-post {
     flex-direction: column;
@@ -209,18 +226,29 @@ footer {
   .all-content {
     flex-direction: column;
   }
-  .mp-level {
+  .nb-level {
     flex-direction: column;
     padding: 0;
     border-radius: 0;
     padding: 3px 3px 0 3px;
   }
-  .mp-level2 {
+  .nb-level2 {
     border: solid 3px green;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
   }
   .navigation-side {
     min-height: 0;
     margin: 0;
+  }
+  .bi-person,
+  .bi-cart,
+  .bi-house,
+  .bi-box-arrow-in-left,
+  .bi-box-arrow-in-right,
+  .bi-pen {
+    font-size: 15px;
   }
 }
 @media screen and (min-width: 400px) and (max-width: 490px) {
@@ -251,8 +279,8 @@ footer {
   .article {
     padding: 0;
   }
-}
 
-.bi-person {
-  color: green;
+  .nb-level2 {
+    flex-direction: column;
+  }
 }

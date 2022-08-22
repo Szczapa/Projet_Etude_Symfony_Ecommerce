@@ -4,7 +4,6 @@ const indicator = document.querySelector(".loading-bar"),
   main = document.querySelector("main"),
   options = {},
   observer = new IntersectionObserver(setIndicator, options);
-
 observer.observe(main);
 
 function setIndicator(entries) {
@@ -15,6 +14,7 @@ function setIndicator(entries) {
     window.removeEventListener("scroll", indicatorAnimation);
   }
 }
+
 function indicatorAnimation() {
   if (window.scrollY > main.offsetTop) {
     const height =
