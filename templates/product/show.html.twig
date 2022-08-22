@@ -89,9 +89,10 @@
                 <div class="col-12">
                     <p> Ajouter un commentaire</p><br>
                     {{form(form)}}
+                    <hr>
                 </div>
                 {% for com in comments %}
-                <div class="border p-2 row">
+                <div class=" p-2 row w-100">
                     <div class="col-10"><strong> {{com.title}} </strong></div>
                     <div class="col-2">{{com.note}} / 5</div>
                     <div class="col-12 mt-2">{{com.comment}}</div>
@@ -105,6 +106,7 @@
             <div class="border p-2 row">
                 <div class="col-12">
                     <a href="{{path('app_login')}}">Ce connecter pour ajouter un commentaire ?</a>
+                    <hr>
                 </div>
             </div>
             {% for com in comments %}
@@ -127,6 +129,7 @@
                         <p class="mb-1"> Ajouter un commentaire </p>
                     </strong> <br>
                     {{form(form)}}
+                    <hr>
                 </div>
                 <div class="col-12">
                     <strong>
