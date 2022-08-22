@@ -53,7 +53,7 @@ class RegisterController extends AbstractController
                 $this->entityManager->persist($user);
 
                 $this->entityManager->flush();
-                $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('app_login');
                 $notification = 'Votre inscription à était prise en compte';
 
                 $mail = new Mail();
