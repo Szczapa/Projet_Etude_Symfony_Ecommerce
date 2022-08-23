@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     private $entityManager;
-
+    
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this-> entityManager = $entityManager;
@@ -82,8 +82,7 @@ class ProductController extends AbstractController
                 $this->entityManager->persist($create);
                 $this->entityManager->flush();
                 return $this->redirect($request->getUri());
-            }
-            //alerte une erreur est subvenue
+            }           
         }
 
         if ($user && $com) {
