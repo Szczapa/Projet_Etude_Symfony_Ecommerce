@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 06 juil. 2022 à 14:55
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Généré le : mar. 23 août 2022 à 17:35
+-- Version du serveur :  10.4.18-MariaDB
+-- Version de PHP : 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,23 +29,27 @@ USE `afcicommerce`;
 -- Structure de la table `actuality`
 --
 
-CREATE TABLE IF NOT EXISTS `actuality` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `actuality` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `post` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `post` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `actuality`
 --
 
 INSERT INTO `actuality` (`id`, `title`, `image`, `created_at`, `content`, `subtitle`, `post`) VALUES
-(1, 'Elder scroll 6', 'a48b7de6d05dc8832eb1159932fd280af1141517.jpg', '2022-06-17 15:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit, nibh id efficitur dignissim, nibh ante blandit dui, quis venenatis magna nibh vel velit. Morbi ac ex sit amet lectus vulputate blandit sit amet eu elit. Fusce suscipit porta purus quis gravida. Aliquam vel lorem non massa varius cursus id facilisis enim. Mauris ipsum velit, vulputate eu ornare in, auctor sodales elit. Sed eleifend commodo ante, nec gravida est. Nulla sagittis ultricies neque varius accumsan. Integer sed sem eleifend, vulputate ante nec, malesuada mauris. Vivamus et ornare libero. Cras ultrices eros sit amet felis tristique, quis porttitor elit mollis. Nulla dolor nunc, vulputate in justo in, semper lacinia nisi.', 'le jeu tant attendue', 0);
+(1, 'The Elder scroll 6', 'a48b7de6d05dc8832eb1159932fd280af1141517.jpg', '2022-06-17 15:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit, nibh id efficitur dignissim, nibh ante blandit dui, quis venenatis magna nibh vel velit. Morbi ac ex sit amet lectus vulputate blandit sit amet eu elit. Fusce suscipit porta purus quis gravida. Aliquam vel lorem non massa varius cursus id facilisis enim. Mauris ipsum velit, vulputate eu ornare in, auctor sodales elit. Sed eleifend commodo ante, nec gravida est. Nulla sagittis ultricies neque varius accumsan. Integer sed sem eleifend, vulputate ante nec, malesuada mauris. Vivamus et ornare libero. Cras ultrices eros sit amet felis tristique, quis porttitor elit mollis. Nulla dolor nunc, vulputate in justo in, semper lacinia nisi.', 'Le jeu tant attendue fait parler de lui', 1),
+(2, 'Petit Poney', '10a22815b8e6b54f58cf6e5cf1c6dbf7e8fdfe25.jpg', '2022-08-11 00:00:00', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.', 'Tous a cheval', 1),
+(3, 'Meilleure vie à la piscine', '10879340b5bbfcfbf8ca5b221bb248c180ca5b29.jpg', '2022-08-11 00:00:00', 'Morbi non dignissim lectus. Ut imperdiet dui placerat varius viverra. Nullam sodales nunc pellentesque blandit imperdiet. Donec eget dolor et nunc gravida rhoncus. Morbi consequat nibh magna, eget dictum leo porta at. Proin velit sapien, pretium sit amet congue et, venenatis a tellus. Suspendisse gravida vel sem eget facilisis. Vestibulum et dui id quam convallis dictum. Suspendisse augue purus, porta ut ipsum nec, ornare sollicitudin lacus.', 'Vue sur Los Santos', 1),
+(4, 'Overwatch de retour ?', '83de42a634eb40fa15091ec9d4fa144be5a691c6.png', '2022-08-10 00:00:00', 'Cras libero purus, pretium vitae aliquam sit amet, porttitor id velit. Pellentesque accumsan molestie velit id mollis. Morbi quis lacus ac nisl aliquam tempus. Mauris hendrerit efficitur eros. Donec efficitur, elit quis commodo venenatis, ex arcu varius mauris, non tempus enim mi vel nulla. Ut sollicitudin turpis justo, quis finibus odio elementum nec. Phasellus fermentum ultricies diam, eget porttitor justo.', 'La date de sortie Approche !', 1),
+(5, 'Un nouveau casino en ligne ouvre ses portes', '1509db2e876a36d69dcb339c9aae11b14d41c9f2.jpg', '2022-08-05 00:00:00', 'Cras libero purus, pretium vitae aliquam sit amet, porttitor id velit. Pellentesque accumsan molestie velit id mollis. Morbi quis lacus ac nisl aliquam tempus. Mauris hendrerit efficitur eros. Donec efficitur, elit quis commodo venenatis, ex arcu varius mauris, non tempus enim mi vel nulla. Ut sollicitudin turpis justo, quis finibus odio elementum nec.', 'Vive l\'argent', 1),
+(6, 'Ces personnages inspirés de mythes', 'f2f138fdc28783650be9ed68fd2787db62473afb.jpg', '2022-08-11 00:00:00', 'Praesent posuere turpis est, et molestie neque pellentesque eu. Etiam tristique, erat non sodales rutrum, erat nunc vulputate lacus, id feugiat nibh augue ut augue. Nulla rutrum viverra tortor, ut pretium velit elementum id. Nullam et ante lectus. Vivamus vitae aliquam justo. Duis a tellus euismod, pellentesque nunc in, interdum lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas aliquam rhoncus dui, eu mattis sapien tristique ut. Etiam nec bibendum elit. Integer volutpat ligula id eros egestas fermentum eu eget diam. Nullam efficitur vel quam vel hendrerit.', 'Culture et jeu vidéo', 1);
 
 -- --------------------------------------------------------
 
@@ -53,8 +57,8 @@ INSERT INTO `actuality` (`id`, `title`, `image`, `created_at`, `content`, `subti
 -- Structure de la table `address`
 --
 
-CREATE TABLE IF NOT EXISTS `address` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `address` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -64,20 +68,17 @@ CREATE TABLE IF NOT EXISTS `address` (
   `postal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_D4E6F81A76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `address`
 --
 
 INSERT INTO `address` (`id`, `user_id`, `name`, `firstname`, `lastname`, `company`, `address`, `postal`, `city`, `country`, `phone`) VALUES
-(6, 4, 'kebab', 'michel', 'michele2', 'kebab avec la sauce', '452 rue de l\'oignon', '50000', 'boulette', 'FR', '0303030303'),
-(7, 4, 'maison', 'aa', 'bb', NULL, '4555 dfezfddfs', '500', 'bb', 'BH', '0606060606'),
 (8, 8, 'Mon adresse', 'adam', 'gilabert', NULL, '451 chemin du nouveau monde', '59250', 'halluin', 'FR', '0647000000'),
-(9, 1, 'Ma maison', 'Adam', 'Gilabert', NULL, '451 chemin du nouveau monde', '59250', 'halluin', 'FR', '0647010000');
+(9, 1, 'Ma maison', 'Adam', 'Gilabert', NULL, '451 chemin du nouveau monde', '59250', 'halluin', 'FR', '0647010000'),
+(10, 3, 'maison', 'adam', 'gilabert', NULL, '451 chemin du nouveau monde', '59250', 'halluin', 'FR', '0647016706');
 
 -- --------------------------------------------------------
 
@@ -85,13 +86,12 @@ INSERT INTO `address` (`id`, `user_id`, `name`, `firstname`, `lastname`, `compan
 -- Structure de la table `carrier`
 --
 
-CREATE TABLE IF NOT EXISTS `carrier` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `carrier` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `carrier`
@@ -106,11 +106,10 @@ INSERT INTO `carrier` (`id`, `name`, `description`, `price`) VALUES
 -- Structure de la table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `category`
@@ -131,24 +130,20 @@ INSERT INTO `category` (`id`, `name`) VALUES
 -- Structure de la table `comment`
 --
 
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `comment` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_9474526CA76ED395` (`user_id`),
-  KEY `IDX_9474526C4584665A` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `note` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `comment`
 --
 
 INSERT INTO `comment` (`id`, `user_id`, `product_id`, `title`, `comment`, `note`) VALUES
-(1, 1, 1, 'Un super jeu', 'HOHOHO voici un super jeux ', 5),
 (2, 2, 1, '123', 'gfdsgf', 1);
 
 -- --------------------------------------------------------
@@ -157,11 +152,10 @@ INSERT INTO `comment` (`id`, `user_id`, `product_id`, `title`, `comment`, `note`
 -- Structure de la table `doctrine_migration_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
+CREATE TABLE `doctrine_migration_versions` (
   `version` varchar(191) COLLATE utf8_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int(11) DEFAULT NULL,
-  PRIMARY KEY (`version`)
+  `execution_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -200,23 +194,22 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- Structure de la table `favoris`
 --
 
-CREATE TABLE IF NOT EXISTS `favoris` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `favoris` (
+  `id` int(11) NOT NULL,
   `favoris` tinyint(1) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_8933C432A76ED395` (`user_id`),
-  KEY `IDX_8933C4324584665A` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `favoris`
 --
 
 INSERT INTO `favoris` (`id`, `favoris`, `user_id`, `product_id`) VALUES
-(1, 0, 1, 2),
-(2, 0, 1, 2);
+(1, 1, 1, 2),
+(2, 0, 1, 2),
+(11, 1, 4, 5),
+(13, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -224,15 +217,14 @@ INSERT INTO `favoris` (`id`, `favoris`, `user_id`, `product_id`) VALUES
 -- Structure de la table `header`
 --
 
-CREATE TABLE IF NOT EXISTS `header` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `header` (
+  `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `btn_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `btn_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `header`
@@ -248,18 +240,14 @@ INSERT INTO `header` (`id`, `title`, `content`, `btn_title`, `btn_url`, `image`)
 -- Structure de la table `messenger_messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messenger_messages` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messenger_messages` (
+  `id` bigint(20) NOT NULL,
   `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL,
   `available_at` datetime NOT NULL,
-  `delivered_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
-  KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
-  KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
+  `delivered_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -268,8 +256,8 @@ CREATE TABLE IF NOT EXISTS `messenger_messages` (
 -- Structure de la table `order`
 --
 
-CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `carrier_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -277,10 +265,8 @@ CREATE TABLE IF NOT EXISTS `order` (
   `delivery` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `reference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stripe_session_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_F5299398A76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `state` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `order`
@@ -289,7 +275,10 @@ CREATE TABLE IF NOT EXISTS `order` (
 INSERT INTO `order` (`id`, `user_id`, `created_at`, `carrier_name`, `carrier_price`, `delivery`, `reference`, `stripe_session_id`, `state`) VALUES
 (1, 1, '2022-06-16 11:06:25', 'Calissimo', 1190, 'Adam Gilabert<br>0647010000<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '16062022-62aaf291bd7af', NULL, 0),
 (2, 1, '2022-06-16 14:10:50', 'Calissimo', 1190, 'Adam Gilabert<br>0647010000<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '16062022-62ab1dcaa0ce8', 'cs_test_b16WzDNfcUpkrKcOThMsUvx3deksrwdCxaVdduPpsIGGhZ3rmGXWieExna', 1),
-(3, 1, '2022-06-17 10:58:52', 'Calissimo', 1190, 'Adam Gilabert<br>0647010000<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '17062022-62ac424cea6b7', 'cs_test_b1rN6cSnHJh9ZJQEoCSQaddO6RIGVI2EDXOqWFwvxphzqZdwtmadjzjd1z', 3);
+(3, 1, '2022-06-17 10:58:52', 'Calissimo', 1190, 'Adam Gilabert<br>0647010000<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '17062022-62ac424cea6b7', 'cs_test_b1rN6cSnHJh9ZJQEoCSQaddO6RIGVI2EDXOqWFwvxphzqZdwtmadjzjd1z', 3),
+(4, 3, '2022-07-18 11:09:35', 'Calissimo', 1190, 'adam gilabert<br>0647016706<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '18072022-62d5234f3295c', 'cs_test_b1zvIaAQxMmA4q88rW2GDCttksjvevGrEjLuP3Ct2g7BsqzIPMvHiOuWiR', 3),
+(5, 4, '2022-08-22 17:25:32', 'Calissimo', 1190, 'michel michele2<br>0303030303<br>kebab avec la sauce<br>452 rue de l\'oignon<br>50000 boulette<br>FR', '22082022-63039fece98f4', NULL, 0),
+(6, 1, '2022-08-22 17:27:23', 'Calissimo', 1190, 'Adam Gilabert<br>0647010000<br>451 chemin du nouveau monde<br>59250 halluin<br>FR', '22082022-6303a05ba8a83', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -297,16 +286,14 @@ INSERT INTO `order` (`id`, `user_id`, `created_at`, `carrier_name`, `carrier_pri
 -- Structure de la table `order_details`
 --
 
-CREATE TABLE IF NOT EXISTS `order_details` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
   `my_order_id` int(11) NOT NULL,
   `product` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `quantity` int(11) NOT NULL,
   `price` double NOT NULL,
-  `total` double NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_845CA2C1BFCDF877` (`my_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `order_details`
@@ -315,7 +302,11 @@ CREATE TABLE IF NOT EXISTS `order_details` (
 INSERT INTO `order_details` (`id`, `my_order_id`, `product`, `quantity`, `price`, `total`) VALUES
 (1, 1, 'Pac Man Collection', 1, 7000, 7000),
 (2, 2, 'It take two', 1, 3999, 3999),
-(3, 3, 'It takes two', 1, 3999, 3999);
+(3, 3, 'It takes two', 1, 3999, 3999),
+(4, 4, 'It takes two', 1, 3999, 3999),
+(5, 5, 'World of Warcraft', 1, 2499, 2499),
+(6, 5, 'Xbox Game Pass', 1, 1000, 1000),
+(7, 6, 'It takes two', 1, 3999, 3999);
 
 -- --------------------------------------------------------
 
@@ -323,8 +314,8 @@ INSERT INTO `order_details` (`id`, `my_order_id`, `product`, `quantity`, `price`
 -- Structure de la table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -332,10 +323,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_best` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_D34A04AD12469DE2` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `is_best` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `product`
@@ -354,13 +343,11 @@ INSERT INTO `product` (`id`, `category_id`, `name`, `slug`, `subtitle`, `descrip
 -- Structure de la table `reset_password`
 --
 
-CREATE TABLE IF NOT EXISTS `reset_password` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reset_password` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_B9983CE5A76ED395` (`user_id`)
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -369,16 +356,14 @@ CREATE TABLE IF NOT EXISTS `reset_password` (
 -- Structure de la table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
   `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
@@ -386,55 +371,191 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `firstname`, `lastname`) VALUES
 (1, 'adam.gilabert@gt2sformation.fr', '[\"ROLE_ADMIN\"]', '$2y$13$Lh8wU7B1GVmdoF0wi.ErYuR1hIYawMlW2hB8GePa4MmG34y1qWNh2', 'Adam', 'Gilabert'),
-(2, 'michelmichel@michel.com', '[]', '$2y$13$qJRicGcXs2Kt94tlv.eRkuEvlcoxEUJiowg/QJ51Z2CyttlIPzz2u', 'michel', 'michel');
+(2, 'michelmichel@michel.com', '[]', '$2y$13$qJRicGcXs2Kt94tlv.eRkuEvlcoxEUJiowg/QJ51Z2CyttlIPzz2u', 'michel', 'michel'),
+(3, 'gilabertadam@gmail.com', '[]', '$2y$13$lswMiQ5xIXlYoBe.DWR7/eSWWJKW8LIij33Yp83h61ZQfVCyL9yg6', 'adam', 'adam');
 
 --
--- Contraintes pour les tables déchargées
+-- Index pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `address`
+-- Index pour la table `actuality`
+--
+ALTER TABLE `actuality`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `FK_D4E6F81A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_D4E6F81A76ED395` (`user_id`);
 
 --
--- Contraintes pour la table `comment`
+-- Index pour la table `carrier`
+--
+ALTER TABLE `carrier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `FK_9474526C4584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_9474526CA76ED395` (`user_id`),
+  ADD KEY `IDX_9474526C4584665A` (`product_id`);
 
 --
--- Contraintes pour la table `favoris`
+-- Index pour la table `doctrine_migration_versions`
+--
+ALTER TABLE `doctrine_migration_versions`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- Index pour la table `favoris`
 --
 ALTER TABLE `favoris`
-  ADD CONSTRAINT `FK_8933C4324584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  ADD CONSTRAINT `FK_8933C432A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_8933C432A76ED395` (`user_id`),
+  ADD KEY `IDX_8933C4324584665A` (`product_id`);
 
 --
--- Contraintes pour la table `order`
+-- Index pour la table `header`
+--
+ALTER TABLE `header`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
+  ADD KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
+  ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
+
+--
+-- Index pour la table `order`
 --
 ALTER TABLE `order`
-  ADD CONSTRAINT `FK_F5299398A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F5299398A76ED395` (`user_id`);
 
 --
--- Contraintes pour la table `order_details`
+-- Index pour la table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `FK_845CA2C1BFCDF877` FOREIGN KEY (`my_order_id`) REFERENCES `order` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_845CA2C1BFCDF877` (`my_order_id`);
 
 --
--- Contraintes pour la table `product`
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `FK_D34A04AD12469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_D34A04AD12469DE2` (`category_id`);
 
 --
--- Contraintes pour la table `reset_password`
+-- Index pour la table `reset_password`
 --
 ALTER TABLE `reset_password`
-  ADD CONSTRAINT `FK_B9983CE5A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_B9983CE5A76ED395` (`user_id`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `actuality`
+--
+ALTER TABLE `actuality`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `address`
+--
+ALTER TABLE `address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `carrier`
+--
+ALTER TABLE `carrier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `favoris`
+--
+ALTER TABLE `favoris`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT pour la table `header`
+--
+ALTER TABLE `header`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `messenger_messages`
+--
+ALTER TABLE `messenger_messages`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `reset_password`
+--
+ALTER TABLE `reset_password`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
