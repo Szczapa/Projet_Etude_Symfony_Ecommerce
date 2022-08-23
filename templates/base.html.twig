@@ -9,35 +9,19 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <title>{% block title %}Projet de jury{% endblock %}</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap & CSS -->
     <link href="{{asset("assets/css/bootstrap.min.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("assets/css/boutique.css")}}">
     <link href="{{ asset("assets/css/carousel.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-
     {% block javascript %}{% endblock %}
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
 </head>
 
-{# <body class="d-flex flex-column vh-100"> #}
-
+{# Si le routeur active actuellement est actuality alors padding top de 0 #}
 <body class="{% if  app.request.get('_route') == 'actuality' %} pt-0 {% endif %}">
+
+{# Si le routeur active actuellement n'est pas actuality on affiche la barre de navigation par défaut#}
     {% if  app.request.get('_route') != 'actuality' %}
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark align-">
@@ -58,6 +42,7 @@
                     </li>
                 </ul>
                 <div class="navbar-item-custom">
+                {# Si un utilisateur est connecté alors  #}
                     {% if app.user %}
                     <a href="{{path ('account')}}">{{app.user.firstname}} </a> <span class="text-secondary">|</span>
                     <a href="{{path ('app_logout')}}">Deconnexion</a>
@@ -76,17 +61,22 @@
 
     <main role="main">
 
+        {# Si le block carousel est définie dans les templates active alors on l'affiche #}
         {% if block ('carousel') is defined %}
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
+                {# Pour les clé , header dans le tableau headers #}
                 {% for key, header in headers %}
+                {# On ajoute un marqueur de slider et si sa clé est à 0 on lui donne la classe active #}
                 <li data-target="#myCarousel" data-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %}>
                 </li>
                 {% endfor %}
             </ol>
             <div class="carousel-inner">
+              {# Pour les clé , header dans le tableau headers #}
                 {% for key, header in headers %}
+                {# On ajoute le contenue pour la clé actuelle en suivant le paterne suivant #}
                 <div class="carousel-item {% if key == 0 %} active {% endif %}"
                     style="background: url('/uploads/{{header.image}}'); background-size:cover;">
                     <div class="container">
@@ -112,13 +102,15 @@
         </div>
         {% endif %}
 
-        <!-- Marketing messaging and featurettes
-    ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->        
+
+        <!-- Gestion de l'affichage du contenue -->
+        {# Si le routeur active actuellement est différent d'actuality alors  on affiche le contenue du block content #}
         {% if  app.request.get('_route') != 'actuality'%}
+            {# Si le block carousel n'est  pas définie dans les templates alors margin top de 5rem #}
         <div class="container marketing  {% if block ('carousel') is not defined %} mt-5 {% endif %}">
             {% block content %}{% endblock %}
-        </div>       
+        </div>
+        {# Sinon on affiche le contenue du block actualité #}
         {% else %}
         <div class="actu-background">
             {% block actualite %}
@@ -128,6 +120,7 @@
 
     </main>
 
+    {# Footer #}
     <footer class="footer py-3">
         <p class="pt-2">&copy; 2022 Ma compagnie, Inc. &middot; <a href="#">Privacy</a> &middot;
             <a href="#">Terms</a></p>

@@ -30,12 +30,15 @@
                 <br>
                  {# Système de Favori  #}
                 <div class=" pt-3">
-                    <div>
+                    <div>                        
                         <a href="{{ path('add_to_cart', { 'id' : product.id })}}" class="btn btn-info w-75 ">Acheter</a>
+
+                        {# Si favoris n'est pas égale a true alors on affiche le bouton valeur par défaut #}
                         {% if favori != true %}
                         <a class="btn btn-info text-light" href="{{ path('add_to_fav', { 'slug' : product.slug })}}">                          
                              <div><i class="bi bi-balloon-heart"></i></div>
                         </a>
+                        {# Sinon on affiche le bouton favoris active #}
                         {% else %}
                         <a class="btn btn-success text-light" href="{{ path('remove_to_fav', { 'slug' : product.slug })}}">                           
                             <div><i class="bi bi-balloon-heart"></i></div>

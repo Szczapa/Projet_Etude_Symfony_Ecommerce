@@ -50,11 +50,17 @@ class CommentRepository extends ServiceEntityRepository
     public function findMyComment($idProduct, $user)
     {
         return $this->createQueryBuilder('o')
-        ->andWhere('o.product = :idProduct ')
+        // o.product = id du produit
+        ->andWhere('o.product = :idProduct')
+        // o.user = utilisateur actuel
         ->andWhere('o.user = :user')
+        // Set de la valeur idProduct = à la valeur du produit affiché
         ->setParameter('idProduct', $idProduct)
+        // Set de la valeur user = à la valeur du user connecté
         ->setParameter('user', $user)
+         // On prend la requête
         ->getQuery()
+        // On récupère le résultat
         ->getResult()
         ;
     }
@@ -62,10 +68,15 @@ class CommentRepository extends ServiceEntityRepository
     public function findCommentbyprod($idProduct)
     {
         return $this->createQueryBuilder('c')
-        ->andWhere('c.product = :idProduct ')
+        // c.product = id du produit
+        ->andWhere('c.product = :idProduct')
+        // Set de la valeur idProduct = à la valeur du produit affiché
         ->setParameter('idProduct', $idProduct)
+        // Set des résultat par ordre décroissante
         ->orderBy('c.id', 'DESC')
+        // On prend la requête
         ->getQuery()
+        // On récupère le résultat
         ->getResult()
         ;
     }

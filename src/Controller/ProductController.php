@@ -50,49 +50,84 @@ class ProductController extends AbstractController
     #[Route('/produits/{slug}', name: 'product_slug')]
     public function product(string $slug, Request $request, Note $note, Favorisfound $findfavori): Response
     {
+        // Récupération du produit de la page
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
-        $user = $this->getUser();
 
+        // Récupération de l'id du produit correspondant au slug
+        $idProduct = $product ->getId();
+
+        // si un url est tapé avec un produit non correspondant -> retour à la page produit
         if (!$product) {
             return $this->redirectToRoute('products');
         }
 
-        $idProduct = $product ->getId();
-        $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
-        $favori = $findfavori -> getFavori($idProduct, $user);
-        $moyenne = $note -> getFullNote($idProduct);
+        // Récupération de l'utilisateur de la session active
+        $user = $this->getUser();
 
+        // Si aucun utilisateur connecté on retourne la page actuelle
+        $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
+
+        // Appelle de la classe Favorisfound et attente du retour de la valeur de favori
+        $favori = $findfavori -> getFavori($idProduct, $user);
+
+        // Système de calcul de Moyenne
+        $moyenne = $note -> getFullNote($idProduct);
 
         // Partie Commentaire du produit
         $commentStatut = null;
+        
+        // Requête Customisé pour trouver les commentaires
         $comments = $this->entityManager->getRepository(Comment::class)->findCommentbyprod($idProduct);
         $com = $this->entityManager->getRepository(Comment::class)->findMyComment($idProduct, $user);
 
+        // Création de Commentaire
         $create = new Comment();
+        
+        // Récupération du formulaire de Commentaire
         $form = $this -> createForm(CommentType::class, $create);
         $form->handleRequest($request);
 
+        // Si le formulaire est soumis
         if ($form->isSubmitted()) {
+
+            // On récupére les données de la création de commentaire
             $create = $form->getData();
 
+            // On set User sur l'utilisateur actuel
             $create->setUser($user);
+            // On set product sur le produit de la page
             $create->setProduct($product);
 
+            // On vérifie si le formulaire est valide
             if ($form->isValid()) {
+
+                // On persiste les information
                 $this->entityManager->persist($create);
+
+                // On push en base de données
                 $this->entityManager->flush();
+
+                // On redirige sur l'url actuelle
                 return $this->redirect($request->getUri());
             }           
         }
 
+        // Selection du statut de commentaire
+
+        // Utilisateur connecté et commentaire existant
         if ($user && $com) {
              $commentStatut = 2;
-        } elseif ($user && !$com) {
+        }
+        // Utilisateur connecté et aucun commentaire
+        elseif ($user && !$com) {
              $commentStatut = 1;
-        } else {
+        }
+        // pas d'utilisteur 
+        else {
             $commentStatut = 0;
         }
 
+        //Système de retour / rendu visuel
         return $this->render(
             'product/show.html.twig',
             [
@@ -100,8 +135,12 @@ class ProductController extends AbstractController
             'best' => $best,
             'commentStatut' => $commentStatut,
             'comments' => $comments,
+
+            // Retour du formulaire et création du visuel
             'form' => $form->createView(),
+            // Retour de la valeur de favori
             'favori' => $favori,
+            // Retour de la moyenne
             'moyenne' => $moyenne
             ]
         );
