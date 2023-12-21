@@ -17,7 +17,7 @@ class StripeController extends AbstractController
     #[Route('/commande/create-session/{reference}', name: 'stripe_create_session')]
     public function index(Cart $cart, $reference, EntityManagerInterface $entityManager): Response
     {
-        Stripe::setApiKey('sk_test_51KveoEKtLKjmqPB1YKe0w7c9u4iZ76JvLBR1YKTzBaVpVvUTMfrt31B2STcoEeTwx17Z2q3JRtK3wcF9bMDV236T00xjvnrKqE');
+        Stripe::setApiKey('');
         $YOUR_DOMAIN = 'http://127.0.0.1:8000';
 
             $product_for_stripe = [];
