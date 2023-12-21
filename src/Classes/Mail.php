@@ -15,7 +15,7 @@ class Mail
         'Messages' => [
         [
         'From' => [
-          'Email' => "adam.gilabert@gt2sformation.fr",
+          'Email' => "",
           'Name' => "AFCI MEgacenter"
         ],
         'To' => [
