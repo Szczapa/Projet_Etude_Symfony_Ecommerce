@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classes\Cart;
+use App\Classes\AddressManager;
 use App\Entity\Address;
 use App\Form\AddressType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountAddressController extends AbstractController
 {
     private $entityManager;
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, AddressManager $addressClass)
     {
         $this-> entityManager = $entityManager;
+        $this-> addressClass = $addressClass;
     }
 
     #[Route('/compte/adresses', name: 'account_address')]
@@ -32,9 +34,8 @@ class AccountAddressController extends AbstractController
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $address -> setUser($this->getUser());
-            $this->entityManager->persist($address);
-            $this->entityManager->flush();
+            $user = $this->getUser();
+            $this->addressClass->addAddress($address,$user);
             if ($cart->get()) {
                 return $this->redirectToRoute('order');
             }
@@ -53,14 +54,18 @@ class AccountAddressController extends AbstractController
     {
         $address = $this->entityManager->getRepository(Address::class)->findOneBy(['id' => $id]);
 
-        if (!$address || $address->getUser() != $this->getUser()) {
+        if(!$this->addressClass->checkAddress($address,$this->getUser())){
             return $this->redirectToRoute('account_address');
         }
+
+        // if (!$address || $address->getUser() != $this->getUser()) {
+        //     return $this->redirectToRoute('account_address');
+        // }
 
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
+            $this->addressClass->editAddress($address);            
             return $this->redirectToRoute('account_address');
         }
         return $this->render(
@@ -78,8 +83,7 @@ class AccountAddressController extends AbstractController
         $address = $this->entityManager->getRepository(Address::class)->findOneBy(['id' => $id]);
 
         if ($address && $address->getUser() == $this->getUser()) {
-            $this->entityManager->remove($address);
-            $this->entityManager->flush();
+            $this->addressClass->removeAddress($address);            
         }
 
         return $this->redirectToRoute('account_address');
