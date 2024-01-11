@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\Favorisfound;
+use App\Classes\FavorisManager;
 use App\Classes\Search;
 use App\Classes\Note;
 use App\Entity\Comment;
@@ -48,7 +48,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/produits/{slug}', name: 'product_slug')]
-    public function product(string $slug, Request $request, Note $note, Favorisfound $findfavori): Response
+    public function product(string $slug, Request $request, Note $note, FavorisManager $findfavori): Response
     {
         // Récupération du produit de la page
         $product = $this->entityManager->getRepository(Product::class)->findOneBySlug($slug);
@@ -67,7 +67,7 @@ class ProductController extends AbstractController
         // Si aucun utilisateur connecté on retourne la page actuelle
         $best = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
 
-        // Appelle de la classe Favorisfound et attente du retour de la valeur de favori
+        // Appelle de la classe FavorisManager et attente du retour de la valeur de favori
         $favori = $findfavori -> getFavori($idProduct, $user);
 
         // Système de calcul de Moyenne

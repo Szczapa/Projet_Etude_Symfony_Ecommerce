@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\FavorisManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Favoris;
@@ -12,9 +13,10 @@ class FavorisController extends AbstractController
 {
         private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, FavorisManager $favorisManager)
     {
         $this-> entityManager = $entityManager;
+        $this-> favorisManager = $favorisManager;
     }
 
     // Ajout de favoris
@@ -42,20 +44,7 @@ class FavorisController extends AbstractController
 
         // Si il n'existe pas de favori et qu'un utilisateur est connecté 
         if (!$fav && $user) {
-
-            // Nouveau favori
-            $favoris = new Favoris();
-
-            // Valeur utilisateur = utilisateur actuel
-            $favoris ->setUser($user);
-            // Valeur produit = produit de la page actuel
-            $favoris->SetProduct($product);
-            // Set de favori = TRUE
-            $favoris->setFavoris(1);
-            // On persiste la valeur 
-            $this->entityManager->persist($favoris);
-            // On Pousse en  Base de données
-            $this->entityManager->flush();
+            $this->favorisManager->addFavori($user,$product);
         }
         // Retour à la page de produit affiché avec la mise à jour du visuel
         return $this->redirectToRoute('product_slug', ['slug' => $slug]);
@@ -87,10 +76,7 @@ class FavorisController extends AbstractController
 
         // Si il existe un favori et qu'un utilisateur est connecté 
         if ($fav && $user) {
-            // On remove le favori de la BDD
-            $this->entityManager->remove($fav);
-            // On Pousse en  Base de données
-            $this->entityManager->flush();            
+            $this->favorisManager->removeFavori($fav);                   
         }
          // Retour à la page de produit affiché avec la mise à jour du visuel
          return $this->redirectToRoute('product_slug', ['slug' => $slug]);
