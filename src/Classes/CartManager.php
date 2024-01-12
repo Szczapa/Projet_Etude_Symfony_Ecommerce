@@ -6,7 +6,7 @@ use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class Cart
+class CartManager
 {
     private $entityManager;
     private $requestStack;

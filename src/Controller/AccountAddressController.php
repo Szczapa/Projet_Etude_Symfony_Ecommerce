@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\Cart;
+use App\Classes\CartManager;
 use App\Classes\AddressManager;
 use App\Entity\Address;
 use App\Form\AddressType;
@@ -28,7 +28,7 @@ class AccountAddressController extends AbstractController
     }
 
     #[Route('/compte/ajouter-adresses', name: 'account_address_add')]
-    public function add(Cart $cart, Request $request): Response
+    public function add(CartManager $cart, Request $request): Response
     {
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);

@@ -51,8 +51,8 @@ class RegisterController extends AbstractController
                 $user->setPassword($passwordHash);
 
                 $this->entityManager->persist($user);
-
                 $this->entityManager->flush();
+                
                 return $this->redirectToRoute('app_login');
                 $notification = 'Votre inscription à était prise en compte';
 

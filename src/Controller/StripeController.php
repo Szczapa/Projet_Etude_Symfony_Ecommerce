@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\Cart;
+use App\Classes\CartManager;
 use App\Entity\Order;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 class StripeController extends AbstractController
 {
     #[Route('/commande/create-session/{reference}', name: 'stripe_create_session')]
-    public function index(Cart $cart, $reference, EntityManagerInterface $entityManager): Response
+    public function index(CartManager $cart, $reference, EntityManagerInterface $entityManager): Response
     {
         Stripe::setApiKey('');
         $YOUR_DOMAIN = 'http://127.0.0.1:8000';

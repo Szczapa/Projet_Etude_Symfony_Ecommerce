@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\Cart;
+use App\Classes\CartManager;
 use App\Entity\Order;
 use App\Entity\OrderDetails;
 use App\Form\OrderType;
@@ -22,7 +22,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande', name: 'order')]
-    public function index(Cart $cart, Request $request): Response
+    public function index(CartManager $cart, Request $request): Response
     {
         if (!$this->getUser()->getAddresses()->getValues()) {
             return $this->redirectToRoute('account_address_add');
@@ -45,7 +45,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande/recap', name: 'order_recap', methods:["POST"])]
-    public function add(Cart $cart, Request $request): Response
+    public function add(CartManager $cart, Request $request): Response
     {
         $form = $this->createForm(
             OrderType::class,

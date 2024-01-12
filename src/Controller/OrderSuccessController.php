@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Classes\Cart;
+use App\Classes\CartManager;
 use App\Classes\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,7 +20,7 @@ class OrderSuccessController extends AbstractController
     }
 
     #[Route('/commande/success/{CHECKOUT_SESSION_ID}', name: 'order_validate')]
-    public function index($CHECKOUT_SESSION_ID, Cart $cart): Response
+    public function index($CHECKOUT_SESSION_ID, CartManager $cart): Response
     {
         $order = $this->entityManager->getRepository(Order::class)->findOneBy(['stripeSessionId' =>  $CHECKOUT_SESSION_ID]);
         if (!$order || $order->getUser() != $this->getUser()) {
